@@ -1,5 +1,84 @@
-import React from "react";
+import navLinks from "@/data/nav-links";
+import socials from "@/data/socials";
+import Link from "next/link";
+import { FaLocationDot, FaPhone } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
 
 export default function Footer() {
-	return <div>Footer</div>;
+	return (
+		<footer className="relative z-1 mt-12 bg-background-dark border-t border-muted/5">
+			<div className="container grid grid-cols-3 gap-12">
+				<div className="py-8 flex flex-col">
+					<h1 className="text-lg font-bold">
+						<span className="text-muted">Geeky</span>
+						<span className="text-primary">Story</span>
+					</h1>
+
+					<p className="mt-2 text-sm text-muted-foreground">
+						Creating digital experiences with code and passion.
+						Let's build something amazing together.
+					</p>
+
+					<div className="mt-3 flex items-center gap-2">
+						{socials.map((item, i) => (
+							<Link
+								key={i}
+								href={item.href}
+								className="bg-surface-dark p-1.5 rounded-full border border-muted/5 hover:bg-primary/10 hover:border-primary/30 transition"
+							>
+								<span className="text-gray-400 hover:text-primary transition">
+									{<item.icon />}
+								</span>
+							</Link>
+						))}
+					</div>
+				</div>
+
+				<div className="py-8">
+					<p className="font-semibold">Navigation</p>
+
+					<div className="flex flex-col gap-2 text-sm mt-2 text-muted-foreground">
+						{navLinks.map(({ link, label }) => (
+							<Link
+								key={label}
+								href={link}
+								className="hover:underline"
+							>
+								{label}
+							</Link>
+						))}
+
+						<Link href="/contact" className="hover:underline">
+							Contact
+						</Link>
+					</div>
+				</div>
+
+				<div className="py-8">
+					<p className="font-semibold">Ready to start a project?</p>
+
+					<div className="flex flex-col gap-2 text-sm mt-2 text-muted-foreground">
+						<p className="flex items-center gap-2">
+							<MdEmail />
+							<Link href="mailto:methupaperera48@gmail.com">
+								methupaperera48@gmail.com
+							</Link>
+						</p>
+						<p className="flex items-center gap-2">
+							<FaPhone />
+							<span>+94 76 943 7742</span>
+						</p>
+						<p className="flex items-center gap-2">
+							<FaLocationDot />
+							<p>Bandaragama, Sri Lanka</p>
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div className="text-sm text-center text-muted-foreground border-t border-muted/5 py-4">
+				&copy;2026 GeekyStory. All rights reserved.
+			</div>
+		</footer>
+	);
 }
