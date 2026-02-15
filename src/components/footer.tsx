@@ -6,7 +6,7 @@ import { MdEmail } from "react-icons/md";
 
 export default function Footer() {
 	return (
-		<footer className="relative z-1 mt-12 bg-background-dark border-t border-muted/5">
+		<footer className="relative z-1 bg-background-dark border-t border-muted/5">
 			<div className="container grid grid-cols-3 gap-12">
 				<div className="py-8 flex flex-col">
 					<h1 className="text-lg font-bold">
@@ -68,10 +68,12 @@ export default function Footer() {
 							<FaPhone />
 							<span>+94 76 943 7742</span>
 						</p>
-						<p className="flex items-center gap-2">
+						<address className="flex items-center gap-2">
 							<FaLocationDot />
-							<p>Bandaragama, Sri Lanka</p>
-						</p>
+							<span className="not-italic">
+								Bandaragama, Sri Lanka
+							</span>
+						</address>
 					</div>
 				</div>
 			</div>

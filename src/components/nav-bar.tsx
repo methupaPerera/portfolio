@@ -12,10 +12,12 @@ export default function NavBar() {
 	return (
 		<nav className="backdrop-blur-lg fixed z-1000 h-16 border-b w-full border-muted/5">
 			<div className="container flex justify-between items-center h-full">
-				<h1 className="text-lg font-bold">
-					<span className="text-muted">Geeky</span>
-					<span className="text-primary">Story</span>
-				</h1>
+				<Link href="/">
+					<h1 className="text-lg font-bold">
+						<span className="text-muted">Geeky</span>
+						<span className="text-primary">Story</span>
+					</h1>
+				</Link>
 
 				<div className="flex items-center gap-8 text-sm">
 					{navLinks.map(({ link, label }, i) => {
