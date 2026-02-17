@@ -17,7 +17,7 @@ import type { Work, WorkResponse } from "@/types/work";
 
 export default async function Work() {
 	const works: WorkResponse = await (
-		await fetch("http://localhost:3000/api/content?type=work")
+		await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/content?type=work`)
 	).json();
 
 	return (

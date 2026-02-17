@@ -13,7 +13,9 @@ export default function Work() {
 	const [works, setWorks] = useState<WorkResponse | null>(null);
 
 	async function fetchWorks(page: number = 1) {
-		fetch(`http://localhost:3000/api/content?type=work&page=${page}`)
+		fetch(
+			`${process.env.NEXT_PUBLIC_API_URL}/api/content?type=work&page=${page}`,
+		)
 			.then((res) => res.json())
 			.then((data) => {
 				if (works) {
