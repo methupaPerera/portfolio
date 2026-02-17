@@ -1,10 +1,37 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { LoaderOne } from "@/components/ui/loader";
+import WorkCard from "@/components/work/work-card";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import type { Work, WorkResponse } from "@/types/work";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Work() {
-	const [active, setActive] = useState<"all" | "personal" | "client">("all");
+	// const [active, setActive] = useState<"all" | "personal" | "client">("all");
+	const [works, setWorks] = useState<WorkResponse | null>(null);
+
+	async function fetchWorks(page: number = 1) {
+		fetch(`http://localhost:3000/api/content?type=work&page=${page}`)
+			.then((res) => res.json())
+			.then((data) => {
+				if (works) {
+					setWorks({
+						...works,
+						items: [...works.items, ...data.items],
+						page: data.page,
+						hasMore: data.hasMore,
+					});
+				} else {
+					setWorks(data);
+				}
+			});
+	}
+
+	useEffect(() => {
+		fetchWorks();
+	}, []);
 
 	return (
 		<div className="container">
@@ -21,7 +48,7 @@ export default function Work() {
 				a developer, problem-solver, and creative thinker.
 			</p>
 
-			<div className="flex justify-center items-center gap-2">
+			{/* <div className="flex justify-center items-center gap-2">
 				<span
 					onClick={() => setActive("all")}
 					className={cn(
@@ -49,10 +76,43 @@ export default function Work() {
 				>
 					Client Projects
 				</span>
+			</div> */}
+
+			{!works && (
+				<div className="flex justify-center my-32">
+					<LoaderOne />
+				</div>
+			)}
+
+			<div className="my-10 grid grid-cols-2 gap-8">
+				{works &&
+					works.items.map((work, i) => (
+						<motion.div
+							key={work.slug}
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true, margin: "-50px" }}
+							transition={{
+								duration: 0.5,
+								ease: "easeOut",
+								delay: i * 0.08,
+							}}
+						>
+							<WorkCard work={work} />
+						</motion.div>
+					))}
 			</div>
 
-			<div>
-				
+			<div className="flex justify-center mb-8">
+				{works && (
+					<Button
+						onClick={() => fetchWorks(works.page + 1)}
+						className="rounded-full"
+						disabled={!works.hasMore}
+					>
+						Load more...
+					</Button>
+				)}
 			</div>
 		</div>
 	);

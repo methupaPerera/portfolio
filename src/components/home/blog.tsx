@@ -5,7 +5,7 @@ import { BsArrowDown } from "react-icons/bs";
 
 export default function Blog() {
 	return (
-		<section className="bg-background-dark border-t border-muted/5 py-16">
+		<section className="bg-background-dark border-y border-muted/5 py-16">
 			<div className="container">
 				<div className="mb-12 flex justify-between items-center">
 					<div className="w-5/6">

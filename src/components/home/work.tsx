@@ -12,14 +12,22 @@ import { BsArrowDown } from "react-icons/bs";
 import { FaExternalLinkAlt, FaTools } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa6";
 import { MdTerminal } from "react-icons/md";
+import WorkCard from "../work/work-card";
+import type { Work, WorkResponse } from "@/types/work";
 
-export default function Work() {
+export default async function Work() {
+	const works: WorkResponse = await (
+		await fetch("http://localhost:3000/api/content?type=work")
+	).json();
+
 	return (
 		<section className="border-t border-muted/5 py-16 bg-background-dark">
 			<div className="container">
 				<div className="flex items-center justify-between mb-12">
 					<div className="w-5/6">
-						<h2 className="font-bold text-4xl mb-2 bg-linear-to-r from-primary to-purple-500 bg-clip-text text-transparent">Work</h2>
+						<h2 className="font-bold text-4xl mb-2 bg-linear-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+							Work
+						</h2>
 						<p className="text-sm font-light text-muted-foreground">
 							A collection of projects showcasing my journey in
 							full-stack development.
@@ -34,88 +42,9 @@ export default function Work() {
 				</div>
 
 				<div className="grid grid-cols-2 gap-8">
-					<div className="hover:bg-background-dark duration-200 bg-slate-900 rounded-2xl overflow-hidden border border-muted/5">
-						<div className="relative">
-							<Image
-								src="/work/libsys.png"
-								width={300}
-								height={300}
-								alt=""
-								className="w-full object-cover object-center h-50"
-							/>
-							<div className="absolute -bottom-2 left-6 bg-primary px-4 py-0.5 rounded-lg text-sm">
-								Personal
-							</div>
-						</div>
-
-						<div className="pt-4 px-6 pb-6">
-							<h5 className="text-lg font-semibold mb-1">
-								Library System
-							</h5>
-							<p className="text-sm text-muted-foreground">
-								This is my first full stack application. The
-								frontend is built with Nextjs & the backend is
-								built with Flask.
-							</p>
-
-							<div className="flex items-center justify-between mt-4">
-								<div className="flex items-center flex-wrap gap-1.5">
-									{["Next.js", "Flask", "Vercel"].map(
-										(item) => (
-											<p
-												key={item}
-												className="bg-surface-dark px-3 pt-0.5 pb-1 text-xs rounded-full"
-											>
-												{item}
-											</p>
-										),
-									)}{" "}
-								</div>
-								<FaExternalLinkAlt className="text-muted-foreground size-3" />
-							</div>
-						</div>
-					</div>
-					<div className="bg-slate-900 rounded-2xl overflow-hidden border border-muted/5">
-						<div className="relative">
-							<Image
-								src="/work/libsys.png"
-								width={300}
-								height={300}
-								alt=""
-								className="w-full object-cover object-center h-50"
-							/>
-							<div className="absolute -bottom-2 left-6 bg-primary px-4 py-0.5 rounded-lg text-sm">
-								Personal
-							</div>
-						</div>
-
-						<div className="pt-4 px-6 pb-6">
-							<h5 className="text-lg font-semibold mb-1">
-								Library System
-							</h5>
-							<p className="text-sm text-muted-foreground">
-								This is my first full stack application. The
-								frontend is built with Nextjs & the backend is
-								built with Flask.
-							</p>
-
-							<div className="flex items-center justify-between mt-4">
-								<div className="flex items-center flex-wrap gap-1.5">
-									{["Next.js", "Flask", "Vercel"].map(
-										(item) => (
-											<p
-												key={item}
-												className="bg-surface-dark px-3 pt-0.5 pb-1 text-xs rounded-full"
-											>
-												{item}
-											</p>
-										),
-									)}{" "}
-								</div>
-								<FaExternalLinkAlt className="text-muted-foreground size-3" />
-							</div>
-						</div>
-					</div>
+					{works.items.map((work) => (
+						<WorkCard key={work.slug} work={work} />
+					))}
 				</div>
 			</div>
 		</section>
