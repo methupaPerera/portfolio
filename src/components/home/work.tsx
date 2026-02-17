@@ -14,11 +14,10 @@ import { FaDatabase } from "react-icons/fa6";
 import { MdTerminal } from "react-icons/md";
 import WorkCard from "../work/work-card";
 import type { Work, WorkResponse } from "@/types/work";
+import { getPage } from "@/lib/content";
 
 export default async function Work() {
-	const works: WorkResponse = await (
-		await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/content?type=work`)
-	).json();
+	const works = getPage("work", 1, 2);
 
 	return (
 		<section className="border-t border-muted/5 py-16 bg-background-dark">
@@ -43,6 +42,7 @@ export default async function Work() {
 
 				<div className="grid grid-cols-2 gap-8">
 					{works.items.map((work) => (
+						// @ts-ignore
 						<WorkCard key={work.slug} work={work} />
 					))}
 				</div>
