@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPage, type ContentType } from "@/lib/content";
 
-export const runtime = "nodejs"; // fs needs node runtime
+export const runtime = "nodejs";
 
 export async function GET(req: NextRequest) {
 	const type = req.nextUrl.searchParams.get("type") as ContentType | null;
@@ -16,11 +16,20 @@ export async function GET(req: NextRequest) {
 	const page = Number(req.nextUrl.searchParams.get("page") ?? "1");
 	const limit = Number(req.nextUrl.searchParams.get("limit") ?? "6");
 
-	try {
-		const data = getPage(type, page, limit);
+	// category can be "tech" or "tech,music"
+	const category = req.nextUrl.searchParams.get("category") ?? "";
+	const categoryMode =
+		(req.nextUrl.searchParams.get("categoryMode") as
+			| "any"
+			| "all"
+			| null) ?? "any";
 
-		// Optional: cache response (good for production where content changes rarely)
-		// Use short cache in dev if you want frequent edits to show up quickly.
+	try {
+		const data = getPage(type, page, limit, {
+			categories: category,
+			categoryMode,
+		});
+
 		return NextResponse.json(data, {
 			headers: {
 				"Cache-Control":

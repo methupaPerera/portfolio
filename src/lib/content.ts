@@ -13,7 +13,6 @@ type DocIndexItem = {
 };
 
 type IndexCache = {
-	// used to detect changes
 	signature: string;
 	items: DocIndexItem[];
 };
@@ -29,12 +28,7 @@ function safeReadDir(dir: string) {
 	return fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
 }
 
-/**
- * Read only the beginning of a file and parse frontmatter.
- * This avoids loading the full MDX body when listing/paginating.
- */
 function readFrontmatterFast(filePath: string) {
-	// 64KB is usually plenty for frontmatter. Increase if you write novels in YAML.
 	const MAX_BYTES = 64 * 1024;
 
 	const fd = fs.openSync(filePath, "r");
@@ -43,22 +37,16 @@ function readFrontmatterFast(filePath: string) {
 		const bytesRead = fs.readSync(fd, buf, 0, MAX_BYTES, 0);
 		const head = buf.subarray(0, bytesRead).toString("utf8");
 
-		// Extract only the frontmatter block if present
-		// Matches starting --- ... --- (first two delimiters)
 		const match = head.match(/^---\s*[\s\S]*?\n---\s*/);
 		const fmOnly = match ? match[0] : "";
 
-		const parsed = matter(fmOnly + "\n"); // gray-matter wants a string to parse
+		const parsed = matter(fmOnly + "\n");
 		return parsed.data as Record<string, any>;
 	} finally {
 		fs.closeSync(fd);
 	}
 }
 
-/**
- * Create a signature to know if the directory content changed.
- * We use filename + mtimeMs (cheap and good enough).
- */
 function computeSignature(dir: string, files: string[]) {
 	const parts: string[] = [];
 	for (const f of files) {
@@ -83,7 +71,6 @@ function buildIndex(type: ContentType): IndexCache {
 		const full = path.join(dir, f);
 		const stat = fs.statSync(full);
 
-		// Parse only frontmatter (fast)
 		const frontmatter = readFrontmatterFast(full);
 
 		return {
@@ -93,7 +80,6 @@ function buildIndex(type: ContentType): IndexCache {
 		};
 	});
 
-	// Sort once (newest first). Prefer `date` if present, else mtime.
 	items.sort((a, b) => {
 		const da = a.frontmatter.date ?? "";
 		const db = b.frontmatter.date ?? "";
@@ -110,9 +96,69 @@ function buildIndex(type: ContentType): IndexCache {
 	return built;
 }
 
+// ---------------- Category helpers ----------------
+
+function normalizeToken(x: unknown): string | null {
+	if (typeof x !== "string") return null;
+	const t = x.trim().toLowerCase();
+	return t ? t : null;
+}
+
+function getDocCategories(frontmatter: Record<string, any>): string[] {
+	// supports:
+	// category: "tech"
+	// categories: ["tech", "music"]
+	// categories: "tech, music"
+	const raw =
+		frontmatter.categories ??
+		frontmatter.category ??
+		frontmatter.tags ??
+		frontmatter.tag ??
+		null;
+
+	if (!raw) return [];
+
+	if (Array.isArray(raw)) {
+		return raw.map(normalizeToken).filter((x): x is string => Boolean(x));
+	}
+
+	if (typeof raw === "string") {
+		return raw
+			.split(",")
+			.map(normalizeToken)
+			.filter((x): x is string => Boolean(x));
+	}
+
+	return [];
+}
+
+type CategoryMode = "any" | "all";
+
+function parseCategoryFilter(input: unknown): string[] {
+	if (!input) return [];
+	if (Array.isArray(input)) {
+		return input
+			.flatMap((v) => String(v).split(","))
+			.map(normalizeToken)
+			.filter((x): x is string => Boolean(x));
+	}
+	return String(input)
+		.split(",")
+		.map(normalizeToken)
+		.filter((x): x is string => Boolean(x));
+}
+
 // ---------- Public API ----------
 
-export function getPage(type: ContentType, page: number, limit: number) {
+export function getPage(
+	type: ContentType,
+	page: number,
+	limit: number,
+	opts?: {
+		categories?: string[] | string; // "tech" or ["tech","music"] or "tech,music"
+		categoryMode?: CategoryMode; // any | all
+	},
+) {
 	const { items } = buildIndex(type);
 
 	const safePage = Number.isFinite(page) ? Math.max(1, Math.floor(page)) : 1;
@@ -120,16 +166,37 @@ export function getPage(type: ContentType, page: number, limit: number) {
 		? Math.min(50, Math.max(1, Math.floor(limit)))
 		: 6;
 
-	const total = items.length;
+	const selected = parseCategoryFilter(opts?.categories);
+	const mode: CategoryMode = opts?.categoryMode === "all" ? "all" : "any";
+
+	// Filter first, then paginate
+	const filtered = selected.length
+		? items.filter((x) => {
+				const cats = getDocCategories(x.frontmatter);
+				if (!cats.length) return false;
+
+				if (mode === "all") {
+					return selected.every((c) => cats.includes(c));
+				}
+				return selected.some((c) => cats.includes(c));
+			})
+		: items;
+
+	const total = filtered.length;
 	const start = (safePage - 1) * safeLimit;
 	const end = start + safeLimit;
 
-	const slice = items.slice(start, end).map((x) => ({
+	const slice = filtered.slice(start, end).map((x) => ({
 		slug: x.slug,
 		...x.frontmatter,
 	}));
 
 	const hasMore = end < total;
+
+	// Optional: useful for filter UI
+	const availableCategories = Array.from(
+		new Set(items.flatMap((x) => getDocCategories(x.frontmatter))),
+	).sort();
 
 	return {
 		items: slice,
@@ -138,6 +205,13 @@ export function getPage(type: ContentType, page: number, limit: number) {
 		total,
 		hasMore,
 		nextPage: hasMore ? safePage + 1 : null,
+
+		// meta for UI
+		filter: {
+			categories: selected, // normalized
+			categoryMode: mode,
+			availableCategories,
+		},
 	};
 }
 

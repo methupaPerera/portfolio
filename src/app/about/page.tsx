@@ -10,14 +10,14 @@ import { FaArrowTrendUp, FaLocationDot } from "react-icons/fa6";
 export default function About() {
 	return (
 		<div className="my-8 container">
-			<h1 className="text-center text-4xl font-bold">
+			<h1 className="text-4xl font-bold">
 				About{" "}
-				<span className="bg-linear-to-r from-primary via-primary to-purple-500 bg-clip-text text-transparent">
+				<span className="bg-linear-to-r from-primary via-primary to-muted bg-clip-text text-transparent">
 					Me
 				</span>
 			</h1>
 
-			<p className="text-center w-5/6 mx-auto font-light text-sm mt-3 text-muted-foreground">
+			<p className="w-5/6 font-light text-sm mt-3 text-muted-foreground">
 				A brief look into my journey as a student, full stack developer,
 				and bassist. From building web applications to exploring music,
 				this page reflects my passion for learning, creativity, and

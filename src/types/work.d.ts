@@ -15,7 +15,7 @@ export type Work = {
 	gallery: string[];
 };
 
-type WorkResponse = {
+export type WorkResponse = {
 	items: Work[];
 	hasMore: boolean;
 	page: number;
