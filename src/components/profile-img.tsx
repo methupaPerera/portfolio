@@ -48,10 +48,10 @@ export default function ProfileImage() {
 			/>
 
 			<Image
-				src="/me.jpg"
+				src="/profile.jpg"
 				width={350}
 				height={350}
-				className="object-bottom border-16 border-muted/5 object-cover rounded-4xl aspect-square contrast-105 relative z-10"
+				className="saturate-40 object-bottom border-16 border-muted/5 object-cover rounded-4xl aspect-square contrast-105 relative z-10"
 				alt="Profile image"
 			/>
 			

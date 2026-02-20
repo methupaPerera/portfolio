@@ -1,10 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { BsArrowDown } from "react-icons/bs";
+import { getPage } from "@/lib/content";
+
 import BlogCard from "../blog/BlogCard";
+import Link from "next/link";
+
+import { BsArrowDown } from "react-icons/bs";
 
 export default function Blog() {
+	const blogs = getPage("blog", 1, 2);
+
 	return (
 		<section className="bg-background-dark border-y border-muted/5 py-16">
 			<div className="container">
@@ -31,8 +34,11 @@ export default function Blog() {
 					</Link>
 				</div>
 
-				<div className="grid grid-cols-3 gap-8">
-					<BlogCard />
+				<div className="grid grid-cols-2 gap-8">
+					{blogs.items.map((blog) => (
+						// @ts-ignore
+						<BlogCard key={blog.slug} blog={blog} />
+					))}
 				</div>
 			</div>
 		</section>

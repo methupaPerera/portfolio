@@ -1,46 +1,114 @@
 "use client";
 
 import type { BlogResponse } from "@/types/blog";
+
 import { useEffect, useState } from "react";
 
+import BlogCard, { BlogCardExtended } from "@/components/blog/BlogCard";
+import { Button } from "@/components/ui/button";
+import { LoaderOne } from "@/components/ui/loader";
+import { cn } from "@/lib/utils";
+
+import { ChevronDown } from "lucide-react";
+
 export default function Blog() {
+	const [filter, setFilter] = useState<string>("");
 	const [blogs, setBlogs] = useState<BlogResponse | null>(null);
 
-	async function fetchBlogs(page: number = 1) {
+	async function fetchBlogs(page: number = 1, reset: boolean = false) {
 		fetch(
-			`${process.env.NEXT_PUBLIC_API_URL}/api/content?type=blog&page=${page}`,
+			`${process.env.NEXT_PUBLIC_API_URL}/api/content?type=blog&page=${page}&category=${filter}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {
-				if (blogs) {
-					setBlogs({
-						...blogs,
-						items: [...blogs.items, ...data.items],
+				setBlogs((prev) => {
+					if (reset || !prev) {
+						return data;
+					}
+
+					return {
+						...prev,
+						items: [...prev.items, ...data.items],
 						page: data.page,
 						hasMore: data.hasMore,
-					});
-				} else {
-					setBlogs(data);
-				}
+					};
+				});
 			});
 	}
-
-	console.log(blogs);
-
 	useEffect(() => {
 		fetchBlogs();
 	}, []);
 
+	useEffect(() => {
+		fetchBlogs(blogs?.page ?? 1, true);
+	}, [filter]);
+
 	return (
-		<div className="container">
+		<div className="mb-12 container">
 			<h1 className="mt-12 text-4xl font-bold">
 				Writing <span className="text-primary">&</span> Thoughts
 			</h1>
-			<p className="pt-2 text-sm text-muted-foreground w-5/6">
+			<p className="mb-8 pt-2 text-sm text-muted-foreground w-5/6">
 				Exploring the frotiers of development, and scalable
 				architecture. A collection of tutorials, case studies and
 				personal insights.
 			</p>
+
+			{!blogs && (
+				<div className="flex justify-center my-32">
+					<LoaderOne />
+				</div>
+			)}
+
+			{blogs && <BlogCardExtended blog={blogs.items[0]} />}
+
+			<div className="mt-8 grid grid-cols-4 gap-8">
+				<div className="grid grid-cols-1 gap-4 col-span-3">
+					{blogs &&
+						blogs.items
+							.slice(0)
+							.map((blog) => (
+								<BlogCard key={blog.slug} blog={blog} />
+							))}
+
+					<div className="flex justify-center mt-8">
+						{blogs && (
+							<Button
+								variant="link"
+								onClick={() => fetchBlogs(blogs.page + 1)}
+								className="rounded-full font-normal"
+								disabled={!blogs.hasMore}
+							>
+								Load More Blogs <ChevronDown />
+							</Button>
+						)}
+					</div>
+				</div>
+
+				<div className="col-span-1">
+					<div className="bg-slate-900 border border-muted/5 p-4 rounded-lg">
+						<p className="font-semibold">Categories</p>
+						<div className="flex items-center flex-wrap gap-1.5 mt-3">
+							{blogs &&
+								["", ...blogs.filter.availableCategories].map(
+									(item) => (
+										<p
+											key={item}
+											className={cn(
+												"cursor-pointer capitalize w-fit border border-muted/5 bg-primary/10 px-3 pt-0.5 pb-1 text-xs rounded-full",
+												filter === item &&
+													"bg-primary!",
+											)}
+											onClick={() => setFilter(item)}
+										>
+											{item || "Any"}
+										</p>
+									),
+								)}
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }

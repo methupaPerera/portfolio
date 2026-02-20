@@ -5,6 +5,7 @@ import { buttonVariants } from "./ui/button";
 import navLinks from "@/data/nav-links";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { MdEmail } from "react-icons/md";
 
 export default function NavBar() {
 	const path = usePathname();
@@ -39,6 +40,7 @@ export default function NavBar() {
 					})}
 
 					<Link href="/contact" className={buttonVariants()}>
+						<MdEmail />
 						Contact
 					</Link>
 				</div>
