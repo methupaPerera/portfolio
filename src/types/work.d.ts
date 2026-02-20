@@ -3,6 +3,7 @@ export type Work = {
 	type: "personal" | "client";
 	title: string;
 	description: string;
+	image: string;
 	overview: string;
 	tech_stack: string[];
 	key_features: string[];

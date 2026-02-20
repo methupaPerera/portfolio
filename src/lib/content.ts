@@ -141,7 +141,10 @@ export function getPage(type: ContentType, page: number, limit: number) {
 	};
 }
 
-export function getDocBySlug(type: ContentType, slug: string) {
+export function getDocBySlug<T extends Record<string, unknown>>(
+	type: ContentType,
+	slug: string,
+): T & { slug: string; content: string } {
 	const filePath = path.join(getDir(type), `${slug}.mdx`);
 
 	if (!fs.existsSync(filePath)) {
@@ -152,8 +155,8 @@ export function getDocBySlug(type: ContentType, slug: string) {
 	const { data, content } = matter(raw);
 
 	return {
+		...(data as T),
 		slug,
-		frontmatter: data as Record<string, any>,
 		content,
 	};
 }

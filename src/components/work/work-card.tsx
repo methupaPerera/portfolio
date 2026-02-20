@@ -10,7 +10,7 @@ export default function WorkCard({ work }: { work: Work }) {
 		<div className="hover:bg-background-dark duration-200 bg-slate-900 rounded-2xl overflow-hidden border border-muted/5">
 			<div className="relative">
 				<Image
-					src="/work/libsys.png"
+					src={work.image}
 					width={300}
 					height={300}
 					alt=""

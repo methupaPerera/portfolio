@@ -1,14 +1,16 @@
 "use client";
 
+import type { Work, WorkResponse } from "@/types/work";
+
+import { useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { LoaderOne } from "@/components/ui/loader";
 import WorkCard from "@/components/work/work-card";
-import { cn } from "@/lib/utils";
-import type { Work, WorkResponse } from "@/types/work";
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
-export default function Work() {
+export default function Works() {
 	// const [active, setActive] = useState<"all" | "personal" | "client">("all");
 	const [works, setWorks] = useState<WorkResponse | null>(null);
 
@@ -37,7 +39,10 @@ export default function Work() {
 
 	return (
 		<div className="container">
-			<h1 className="mt-12 mb-3 text-4xl font-bold text-center">
+			<p className="mt-12 mx-auto mb-2 bg-primary/5 backdrop-blur-2xl text-primary w-fit px-3 py-1 pt-0.5 rounded-full border border-primary text-xs">
+				My Portfolio
+			</p>
+			<h1 className="mb-3 text-4xl font-bold text-center">
 				My{" "}
 				<span className="bg-linear-to-r from-primary to-purple-500 bg-clip-text text-transparent">
 					Work
@@ -108,11 +113,12 @@ export default function Work() {
 			<div className="flex justify-center mb-8">
 				{works && (
 					<Button
+						variant="link"
 						onClick={() => fetchWorks(works.page + 1)}
-						className="rounded-full"
+						className="rounded-full font-normal"
 						disabled={!works.hasMore}
 					>
-						Load more...
+						Load More Projects <ChevronDown />
 					</Button>
 				)}
 			</div>
