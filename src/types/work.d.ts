@@ -11,6 +11,7 @@ export type Work = {
 	code: string;
 	role: string;
 	timeline: string;
+	client: string;
 	gallery: string[];
 };
 

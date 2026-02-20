@@ -1,10 +1,12 @@
-import { buttonVariants } from "@/components/ui/button";
-import { getDocBySlug } from "@/lib/content";
-import { cn } from "@/lib/utils";
 import type { Work } from "@/types/work";
+
+import { getDocBySlug } from "@/lib/content";
+
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+
 import { FaGithub, FaRocket } from "react-icons/fa6";
 import { TiTick } from "react-icons/ti";
 
@@ -14,30 +16,31 @@ export default async function Work({
 	params: Promise<{ id: string }>;
 }) {
 	const { id } = await params;
-	const work: Work = getDocBySlug<Work>("work", id);
 
-	console.log(work);
+	const work: Work = getDocBySlug<Work>("work", id);
 
 	return (
 		<div className="container">
-			<p className="mx-auto capitalize mt-12 mb-4 bg-primary/5 backdrop-blur-2xl text-primary w-fit px-3 py-1 pt-0.5 rounded-full border border-primary text-xs">
-				{work.type} Project
-			</p>
-			<h1 className="text-5xl font-bold text-center drop-shadow-[0_0_20px] drop-shadow-primary/40">
-				{work.title}
-			</h1>
-			<p className="text-muted-foreground text-sm text-center my-4">
-				{work.description}
-			</p>
-			<Image
-				src={work.image}
-				width={1000}
-				height={500}
-				alt={work.title}
-				className="mt-8 w-full rounded-lg border border-muted/5"
-			/>
+			<div className="mb-8">
+				<p className="mx-auto capitalize mt-12 mb-4 bg-primary/5 backdrop-blur-2xl text-primary w-fit px-3 py-1 pt-0.5 rounded-full border border-primary text-xs">
+					{work.type} Project
+				</p>
+				<h1 className="text-5xl font-bold text-center drop-shadow-[0_0_20px] drop-shadow-primary/40">
+					{work.title}
+				</h1>
+				<p className="text-muted-foreground text-sm text-center my-4">
+					{work.description}
+				</p>
+				<Image
+					src={work.image}
+					width={1000}
+					height={500}
+					alt={work.title}
+					className="mt-8 p-1 w-full rounded-lg border border-muted/5"
+				/>
+			</div>
 
-			<div className="mt-8 mb-12 grid grid-cols-3 gap-8">
+			<div className="mb-12 grid grid-cols-3 gap-8">
 				<div className="col-span-2">
 					<h4 className="text-2xl font-semibold relative flex items-center gap-1">
 						<div className="w-1 h-7 bg-primary rounded-full"></div>
@@ -58,6 +61,24 @@ export default async function Work({
 								{item}
 							</p>
 						))}
+					</div>
+
+					<div>
+						<h4 className="mt-8 text-xl font-semibold">
+							Project Gallery
+						</h4>
+						<div className="mt-4 gap-4 grid grid-cols-2">
+							{work.gallery.map((image) => (
+								<Image
+									key={image}
+									src={image}
+									width={400}
+									height={400}
+									alt={work.title}
+									className="w-full rounded-lg"
+								/>
+							))}
+						</div>
 					</div>
 				</div>
 
@@ -93,7 +114,7 @@ export default async function Work({
 						<h4 className="text-sm text-primary font-bold">
 							TECH STACK
 						</h4>
-						<div className="mt-4 flex items-center flex-wrap gap-1.5">
+						<div className="my-4 flex items-center flex-wrap gap-1.5">
 							{work.tech_stack.map((item) => (
 								<p
 									key={item}
@@ -102,6 +123,27 @@ export default async function Work({
 									{item}
 								</p>
 							))}
+						</div>
+
+						<div className="pt-2 flex flex-col gap-2 border-t border-muted/5">
+							<div>
+								<h6 className="text-xs text-muted-foreground">
+									ROLE
+								</h6>
+								<p className="text-sm">{work.role}</p>
+							</div>
+							<div>
+								<h6 className="text-xs text-muted-foreground">
+									TIMELINE
+								</h6>
+								<p className="text-sm">{work.timeline}</p>
+							</div>
+							<div>
+								<h6 className="text-xs text-muted-foreground">
+									CLIENT
+								</h6>
+								<p className="text-sm">{work.client}</p>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -2,7 +2,10 @@ import navLinks from "@/data/nav-links";
 import socials from "@/data/socials";
 import Link from "next/link";
 import { FaLocationDot, FaPhone } from "react-icons/fa6";
+import { IoIosSend } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
+import { buttonVariants } from "./ui/button";
+import { ChevronRight } from "lucide-react";
 
 export default function Footer() {
 	return (
@@ -74,6 +77,16 @@ export default function Footer() {
 								Bandaragama, Sri Lanka
 							</span>
 						</address>
+
+						<Link
+							className={buttonVariants({
+								className: "w-fit mt-2",
+								size: "sm",
+							})}
+							href="/contact"
+						>
+							Send a Message <ChevronRight />
+						</Link>
 					</div>
 				</div>
 			</div>

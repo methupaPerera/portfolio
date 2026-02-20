@@ -1,6 +1,6 @@
 "use client";
 
-import type { Work, WorkResponse } from "@/types/work";
+import type { WorkResponse } from "@/types/work";
 
 import { useEffect, useState } from "react";
 
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { LoaderOne } from "@/components/ui/loader";
 import WorkCard from "@/components/work/work-card";
 import { motion } from "framer-motion";
+
 import { ChevronDown } from "lucide-react";
 
 export default function Works() {
