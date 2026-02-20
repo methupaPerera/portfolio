@@ -1,13 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDocBySlug } from "@/lib/content";
-
-type ContentType = "blog" | "work";
+import { getDocBySlug, type ContentType } from "@/lib/content";
 
 export async function GET(
 	req: NextRequest,
 	{ params }: { params: Promise<{ id: string }> },
 ) {
-	const type = req.nextUrl.searchParams.get("type");
+	const type = req.nextUrl.searchParams.get("type") as ContentType | null;
 	const { id } = await params;
 
 	try {
@@ -25,15 +23,15 @@ export async function GET(
 			);
 		}
 
-		const doc = getDocBySlug(type, id);
+		const doc = getDocBySlug<Record<string, unknown>>(type, id);
 
+		// doc already includes frontmatter fields + slug + content
 		return NextResponse.json({
-			...doc.frontmatter,
+			...doc,
 			content: doc.content,
 		});
 	} catch (err) {
 		console.error(err);
-
 		return NextResponse.json(
 			{ error: "Document not found." },
 			{ status: 404 },
