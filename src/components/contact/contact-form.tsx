@@ -11,22 +11,19 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 
 import { IoIosSend } from "react-icons/io";
-import {
-	LoaderFive,
-	LoaderFour,
-	LoaderOne,
-	LoaderThree,
-	LoaderTwo,
-} from "../ui/loader";
+import { LoaderFive } from "../ui/loader";
 import { TiTick } from "react-icons/ti";
 import { IoClose } from "react-icons/io5";
 
-export default function ContactForm() {
+export default function ContactForm({
+	status,
+}: {
+	status: string | undefined;
+}) {
 	const recaptchaRef = useRef<ReCAPTCHA>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const searchParams = useSearchParams();
-	const status = searchParams.get("status");
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();

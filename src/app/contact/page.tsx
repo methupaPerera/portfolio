@@ -7,7 +7,13 @@ import { BsArrowDown } from "react-icons/bs";
 import { FaInstagram } from "react-icons/fa6";
 import { MdLocationPin } from "react-icons/md";
 
-export default function Contact() {
+export default async function ContactPage({
+	searchParams,
+}: {
+	searchParams: Promise<{ status?: string }>;
+}) {
+	const { status } = await searchParams;
+
 	return (
 		<div className="container grid grid-cols-2 items-center gap-16">
 			<div className="mb-16">
@@ -80,7 +86,7 @@ export default function Contact() {
 			</div>
 
 			<div>
-				<ContactForm />
+				<ContactForm status={status} />
 			</div>
 		</div>
 	);
