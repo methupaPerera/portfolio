@@ -5,11 +5,15 @@ import Image from "next/image";
 
 export default function ProfileImage() {
 	return (
-		<div className="relative size-full flex justify-end overflow-visible">
+		<div className="relative w-full flex justify-center md:justify-end overflow-visible mt-6 md:mt-0">
 			<motion.div
-				className="absolute -right-16 size-[90%] rounded-full
-                   bg-linear-to-tr from-primary via-primary/60 to-primary-dark
-                   blur-3xl"
+				className="
+          absolute 
+          left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:-right-10
+          size-[90%] max-w-87.5 rounded-full
+          bg-linear-to-tr from-primary via-primary/60 to-primary-dark
+          blur-3xl
+        "
 				initial={{
 					opacity: 0,
 					scale: 0,
@@ -32,9 +36,13 @@ export default function ProfileImage() {
 			/>
 
 			<motion.div
-				className="absolute -right-16 size-[90%] rounded-full
-                   bg-linear-to-tr from-primary via-primary/60 to-primary-dark
-                   blur-3xl opacity-60"
+				className="
+          absolute 
+          left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:-right-16
+          size-[90%] max-w-87.5 rounded-full
+          bg-linear-to-tr from-primary via-primary/60 to-primary-dark
+          blur-3xl opacity-60
+        "
 				animate={{
 					scale: [1.05, 1.3, 1.05],
 					rotate: [0, 8, -8, 0],
@@ -51,10 +59,13 @@ export default function ProfileImage() {
 				src="/profile.jpg"
 				width={350}
 				height={350}
-				className="saturate-40 object-bottom border-16 border-muted/5 object-cover rounded-4xl aspect-square contrast-105 relative z-10"
+				className="
+          saturate-40 object-bottom border-16 border-muted/5 
+          object-cover rounded-4xl aspect-square contrast-105 
+          relative z-10
+        "
 				alt="Profile image"
 			/>
-			
 		</div>
 	);
 }

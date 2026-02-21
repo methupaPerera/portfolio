@@ -15,7 +15,7 @@ export default async function ContactPage({
 	const { status } = await searchParams;
 
 	return (
-		<div className="container grid grid-cols-2 items-center gap-16">
+		<div className="container grid md:grid-cols-2 items-center md:gap-16">
 			<div className="mb-16">
 				<p className="mt-16 mb-2 bg-primary/5 backdrop-blur-2xl text-primary w-fit px-3 py-1 pt-0.5 rounded-full border border-primary text-xs">
 					Open for Opportunities.

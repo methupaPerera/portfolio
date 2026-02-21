@@ -24,9 +24,9 @@ export default function About() {
 				continuous growth.s
 			</p>
 
-			<div className="mt-12 grid grid-cols-2 gap-8">
+			<div className="mt-12 grid md:grid-cols-2 gap-8">
 				<div className="p-6 rounded-xl bg-slate-900 border border-muted/5">
-					<div className="grid grid-cols-2 gap-4">
+					<div className="grid md:grid-cols-2 gap-4">
 						<div>
 							<p className="text-xs text-muted-foreground">
 								LOCATION

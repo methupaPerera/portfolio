@@ -27,11 +27,11 @@ export default async function Blog({
 				})}
 			</p>
 
-			<h1 className="text-center mx-auto w-3/4 text-5xl font-bold">
+			<h1 className="text-center mx-auto md:w-3/4 text-5xl font-bold">
 				{blog.title}
 			</h1>
 
-			<div className="mt-8 text-muted-foreground text-sm flex justify-center gap-6 items-center">
+			<div className="mt-8 text-muted-foreground text-sm flex md:flex-row flex-col justify-center gap-2 md:gap-6 items-center">
 				<div className="flex justify-center items-center gap-2">
 					<Image
 						src="/profile.jpg"

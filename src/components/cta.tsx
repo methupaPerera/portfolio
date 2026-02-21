@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function CTA() {
 	return (
-		<section className="bg-primary p-6! rounded-2xl my-16 flex justify-between items-center">
+		<section className="bg-primary p-6! rounded-2xl my-16 flex md:flex-row flex-col text-center md:text-start gap-4 md:justify-between items-center">
 			<div>
 				<h5 className="text-xl font-semibold">
 					Let&apos;s make something amazing!

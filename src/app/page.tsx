@@ -7,7 +7,7 @@ import ParticlesBackground from "@/components/particles";
 
 export default function Page() {
 	return (
-		<div className="relative z-1">
+		<div className="relative z-1 overflow-x-hidden">
 			<Hero />
 			<TechStack />
 			<Work />

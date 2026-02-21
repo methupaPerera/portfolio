@@ -47,36 +47,40 @@ export default function BlogCard({ blog }: { blog: Blog }) {
 
 export function BlogCardExtended({ blog }: { blog: Blog }) {
 	return (
-		<div className="bg-slate-900 border border-muted/5 grid grid-cols-3 gap-8 rounded-xl overflow-hidden">
-			<div className="relative w-full h-full overflow-hidden rounded-lg">
+		<div className="bg-slate-900 border border-muted/5 grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-8 rounded-xl overflow-hidden">
+			<div className="relative w-full h-56 sm:h-64 md:h-full overflow-hidden md:rounded-lg">
 				<Image
 					src={blog.image}
 					alt="blog image"
-					width={220}
-					height={200}
+					width={900}
+					height={600}
 					className="w-full h-full object-cover object-center"
+					priority
 				/>
-
-	
-				<div className="pointer-events-none absolute inset-0 bg-linear-to-l from-slate-900 to-transparent" />
+				<div className="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/30 to-transparent md:bg-linear-to-l" />{" "}
 			</div>
-			<div className="py-8 pb-7 pr-8 col-span-2">
-				<div className="flex gap-4 items-center text-xs text-muted-foreground">
-					<p className="w-fit border border-muted/5 bg-primary/10 px-3 pt-0.5 pb-1 text-xs rounded-full">
+
+			<div className="py-6 px-5 md:py-8 md:pb-7 md:pr-8 md:pl-0 md:col-span-2">
+				<div className="flex flex-wrap gap-3 items-center text-xs text-muted-foreground">
+					<p className="w-fit border border-muted/5 bg-primary/10 px-3 pt-0.5 pb-1 rounded-full">
 						Featured
 					</p>
-					<span className="flex gap-3">
+
+					<span className="flex gap-2">
 						<span>{blog.posted_date}</span> •{" "}
 						<span>{blog.read}</span>
 					</span>
 				</div>
 
-				<h5 className="font-semibold text-2xl mt-4">{blog.title}</h5>
+				<h5 className="font-semibold text-xl md:text-2xl mt-4">
+					{blog.title}
+				</h5>
+
 				<p className="text-xs text-muted-foreground line-clamp-3 my-2">
 					{blog.description}
 				</p>
 
-				<div className="mt-8 flex justify-between items-center">
+				<div className="mt-6 md:mt-8 flex justify-between items-center">
 					<Link
 						href={`/blog/${blog.slug}`}
 						className="flex items-center gap-2 text-sm underline text-primary"

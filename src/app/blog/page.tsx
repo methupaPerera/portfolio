@@ -35,6 +35,7 @@ export default function Blogs() {
 				});
 			});
 	}
+
 	useEffect(() => {
 		fetchBlogs();
 	}, []);
@@ -48,7 +49,8 @@ export default function Blogs() {
 			<h1 className="mt-12 text-4xl font-bold">
 				Writing <span className="text-primary">&</span> Thoughts
 			</h1>
-			<p className="mb-8 pt-2 text-sm text-muted-foreground w-5/6">
+
+			<p className="mb-8 pt-2 text-sm text-muted-foreground w-full md:w-5/6">
 				Exploring the frotiers of development, and scalable
 				architecture. A collection of tutorials, case studies and
 				personal insights.
@@ -62,16 +64,16 @@ export default function Blogs() {
 
 			{blogs && <BlogCardExtended blog={blogs.items[0]} />}
 
-			<div className="mt-8 grid grid-cols-4 gap-8">
-				<div className="grid grid-cols-1 gap-4 col-span-3">
+			<div className="mt-8 w-full grid grid-cols-1 md:grid-cols-4 gap-8">
+				<div className="order-2 md:order-1 grid grid-cols-1 gap-4 md:col-span-3">
 					{blogs &&
 						blogs.items
-							.slice(0)
+							.slice(1)
 							.map((blog) => (
 								<BlogCard key={blog.slug} blog={blog} />
 							))}
 
-					<div className="flex justify-center mt-8">
+					<div className="flex justify-center mt-4">
 						{blogs && (
 							<Button
 								variant="link"
@@ -85,19 +87,20 @@ export default function Blogs() {
 					</div>
 				</div>
 
-				<div className="col-span-1">
-					<div className="bg-slate-900 border border-muted/5 p-4 rounded-lg">
+				<div className="order-1 md:order-2 w-full md:col-span-1 min-w-0">
+					<div className="w-full bg-slate-900 border border-muted/5 p-4 rounded-lg">
 						<p className="font-semibold">Categories</p>
-						<div className="flex items-center flex-wrap gap-1.5 mt-3">
+
+						<div className="flex flex-wrap gap-1.5 mt-3">
 							{blogs &&
 								["", ...blogs.filter.availableCategories].map(
 									(item) => (
 										<p
 											key={item}
 											className={cn(
-												"cursor-pointer capitalize w-fit border border-muted/5 bg-primary/10 px-3 pt-0.5 pb-1 text-xs rounded-full",
+												"cursor-pointer capitalize w-fit border border-muted/5 bg-primary/10 px-3 pt-0.5 pb-1 text-xs rounded-full transition",
 												filter === item &&
-													"bg-primary!",
+													"bg-primary text-white",
 											)}
 											onClick={() => setFilter(item)}
 										>

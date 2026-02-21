@@ -92,7 +92,7 @@ export default function Works() {
 				</div>
 			)}
 
-			<div className="my-10 grid grid-cols-2 gap-8">
+			<div className="my-10 grid md:grid-cols-2 gap-8">
 				{works &&
 					works.items.map((work, i) => (
 						<motion.div

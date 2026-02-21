@@ -2,7 +2,7 @@ import type { Work } from "@/types/work";
 
 import { getDocBySlug } from "@/lib/content";
 
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,8 +40,9 @@ export default async function Work({
 				/>
 			</div>
 
-			<div className="mb-12 grid grid-cols-3 gap-8">
-				<div className="col-span-2">
+			<div className="mb-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+				{/* Main content */}
+				<div className="w-full min-w-0 md:col-span-2">
 					<h4 className="text-2xl font-semibold relative flex items-center gap-1">
 						<div className="w-1 h-7 bg-primary rounded-full"></div>
 						Project Overview
@@ -51,7 +52,7 @@ export default async function Work({
 					</p>
 
 					<h4 className="mt-8 text-xl font-semibold">Key Features</h4>
-					<div className="grid grid-cols-2 gap-2 mt-4">
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4">
 						{work.key_features.map((item) => (
 							<p
 								className="flex items-center gap-1 px-4 py-2 rounded-lg text-sm border border-muted/5 bg-slate-900"
@@ -67,7 +68,7 @@ export default async function Work({
 						<h4 className="mt-8 text-xl font-semibold">
 							Project Gallery
 						</h4>
-						<div className="mt-4 gap-4 grid grid-cols-2">
+						<div className="mt-4 gap-4 grid grid-cols-1 sm:grid-cols-2">
 							{work.gallery.map((image) => (
 								<Image
 									key={image}
@@ -82,7 +83,8 @@ export default async function Work({
 					</div>
 				</div>
 
-				<div>
+				{/* Sidebar */}
+				<div className="w-full min-w-0">
 					<div className="w-full border border-muted/5 rounded-xl p-4 shadow-[0_0_10px] shadow-primary/20">
 						<h4 className="mb-4 text-lg font-semibold">
 							Project Links
@@ -100,13 +102,15 @@ export default async function Work({
 						</Link>
 						<Link
 							href={work.code}
-							className={cn(
-								"w-full bg-gray-800! border border-muted/5 mt-2",
-								buttonVariants(),
-							)}
+							className="cusrsor-pointer flex items-center gap-2"
 						>
-							<FaGithub className="size-4 mt-0.5" />
-							Source Code
+							<Button
+								disabled={!work.code}
+								className="w-full bg-gray-800! disabled:bg-gray-800/80! border border-muted/5 mt-2"
+							>
+								<FaGithub className="size-4 mt-0.5" />
+								Source Code
+							</Button>
 						</Link>
 					</div>
 
@@ -114,6 +118,7 @@ export default async function Work({
 						<h4 className="text-sm text-primary font-bold">
 							TECH STACK
 						</h4>
+
 						<div className="my-4 flex items-center flex-wrap gap-1.5">
 							{work.tech_stack.map((item) => (
 								<p

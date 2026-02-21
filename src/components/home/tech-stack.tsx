@@ -52,7 +52,7 @@ export default function TechStack() {
 						</div>
 					</div>
 
-					<div className="grid grid-cols-2 gap-4">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div className="duration-200 hover:bg-slate-900 border border-muted/5 rounded-xl p-8">
 							<div className="w-fit p-2 bg-surface-dark rounded-lg border border-muted/5 hover:bg-primary/10 hover:border-primary/30 transition">
 								<span className="text-gray-400 hover:text-primary transition">
