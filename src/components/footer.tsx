@@ -1,11 +1,13 @@
-import navLinks from "@/data/nav-links";
 import socials from "@/data/socials";
+import navLinks from "@/data/nav-links";
+
 import Link from "next/link";
-import { FaLocationDot, FaPhone } from "react-icons/fa6";
-import { IoIosSend } from "react-icons/io";
-import { MdEmail } from "react-icons/md";
 import { buttonVariants } from "./ui/button";
+
 import { ChevronRight } from "lucide-react";
+import { FaLocationDot, FaPhone } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+
 
 export default function Footer() {
 	return (

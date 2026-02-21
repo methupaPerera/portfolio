@@ -1,10 +1,10 @@
-import CTA from "@/components/cta";
-import { buttonVariants } from "@/components/ui/button";
-import { Timeline } from "@/components/ui/timeline";
 import socials from "@/data/socials";
+
+import CTA from "@/components/cta";
+import { Timeline } from "@/components/ui/timeline";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+
 import { FaArrowTrendUp, FaLocationDot } from "react-icons/fa6";
 
 export default function About() {

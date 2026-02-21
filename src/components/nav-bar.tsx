@@ -1,10 +1,13 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
+import navLinks from "@/data/nav-links";
+
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
-import navLinks from "@/data/nav-links";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+
 import { MdEmail } from "react-icons/md";
 
 export default function NavBar() {

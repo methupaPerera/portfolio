@@ -1,20 +1,11 @@
-import React from "react";
-import ScrollDown from "@/animations/scroll-down";
-import ParticlesBackground from "@/components/particles";
-import ProfileImage from "@/components/profile-img";
-import { buttonVariants } from "@/components/ui/button";
-import { FlipWords } from "@/components/ui/flip-words";
-import { TypewriterEffect } from "@/components/ui/typewriter-effect";
-import { MoveRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { BsArrowDown } from "react-icons/bs";
-import { FaExternalLinkAlt, FaTools } from "react-icons/fa";
-import { FaDatabase } from "react-icons/fa6";
-import { MdTerminal } from "react-icons/md";
-import WorkCard from "../work/work-card";
-import type { Work, WorkResponse } from "@/types/work";
+import type { Work } from "@/types/work";
+
 import { getPage } from "@/lib/content";
+
+import Link from "next/link";
+import WorkCard from "../work/work-card";
+
+import { BsArrowDown } from "react-icons/bs";
 
 export default async function Work() {
 	const works = getPage("work", 1, 2);

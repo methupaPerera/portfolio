@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 import { ChevronDown } from "lucide-react";
 
-export default function Blog() {
+export default function Blogs() {
 	const [filter, setFilter] = useState<string>("");
 	const [blogs, setBlogs] = useState<BlogResponse | null>(null);
 

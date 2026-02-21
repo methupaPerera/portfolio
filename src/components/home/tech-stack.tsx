@@ -1,4 +1,3 @@
-import React from "react";
 import { FaTools } from "react-icons/fa";
 import { FaDatabase } from "react-icons/fa6";
 import { MdTerminal } from "react-icons/md";

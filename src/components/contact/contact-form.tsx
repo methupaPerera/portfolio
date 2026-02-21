@@ -1,10 +1,11 @@
-import { EmailTemplate } from "@/components/email-templates/contact";
+import { redirect } from "next/navigation";
 import { Resend } from "resend";
 
-import { redirect } from "next/navigation";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
+import { EmailTemplate } from "@/components/email-templates/contact";
+
 import { IoIosSend } from "react-icons/io";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
