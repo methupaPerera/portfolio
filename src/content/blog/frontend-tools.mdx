@@ -1,0 +1,121 @@
+---
+slug: "frontend-tools"
+title: "Frontend tools, which will make your life easier!"
+description: "A practical guide to essential frontend tools and resources that can boost productivity, improve workflow, and make modern web development faster and less frustrating."
+category:
+  - frontend
+  - web
+tags:
+  - frontenddevelopment
+  - webdevelopment
+  - learning
+  - frontendtools
+image: "/blog/frontend-tools/cover.png"
+read: "2 mins"
+posted_date: "Oct 16, 2023"
+---
+
+When I was an absolute beginner, I used to code everything manually. But months later, 
+I started wondering if there was pre-written code available on the internet to boost my workflow. 
+
+After doing some research and working on projects, I found some cool stuff. Now, 
+I'm going to share those with you!
+
+---
+
+## 1. Adding Animations
+
+Writing animations in pure CSS can be quite cumbersome, right? The tools below provide pre-written animation code that you can easily copy and paste.
+
+### Animate.css
+
+You can use this library by downloading the files or through a CDN. It also works with React.
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+```
+
+Then, you can use their classes like this:
+
+```html
+<h1 class="animate__animated animate__bounce">
+  An animated element
+</h1>
+```
+
+### Animista
+
+This CSS animation library generates animation code for you.
+
+Visit: https://animista.net
+
+### Framer Motion
+
+You can create animations in your React application using this library.
+
+Install it using:
+
+```bash
+npm i framer-motion
+```
+
+## 2. Fonts & Icons
+
+Fonts and icons play a huge role in user experience, so you have to choose them carefully.
+
+### Fonts
+
+Google Fonts is one of the most recommended font libraries.
+
+Visit: https://fonts.google.com
+
+### Icons
+
+Here are some useful icon libraries:
+
+https://icons.getbootstrap.com
+
+https://icones.js.org
+
+https://react-icons.github.io/react-icons
+
+https://heroicons.com
+
+https://fontawesome.com
+
+Read their documentation before using them.
+
+## 3. Images
+
+Finding copyright-free images can be difficult. These websites provide free images:
+
+https://undraw.co
+
+https://unsplash.com
+
+## 4. Server-Code-Free Forms
+
+As a frontend developer, handling form data without a backend can be challenging. 
+Formspree allows you to send form data via email without server code.
+
+Visit: https://formspree.io
+
+You need to create an account and generate a form endpoint.
+
+Example:
+
+```html
+<form action="https://formspree.io/f/{form_id}" method="post">
+  <label for="email">Your Email</label>
+  <input name="Email" id="email" type="email" />
+  <button type="submit">Submit</button>
+</form>
+```
+
+Conclusion
+
+Hope you gained some knowledge from this blog post.
+Thank you for reading!

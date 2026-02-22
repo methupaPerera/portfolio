@@ -49,7 +49,7 @@ export async function generateMetadata({
 				publishedTime: blog.posted_date,
 				tags: blog.tags,
 			},
-			
+
 			robots: {
 				index: true,
 				follow: true,
@@ -83,10 +83,12 @@ export default async function Blog({
 					role="list"
 					aria-label="Categories"
 				>
-					{blog.category.map((item) => (
+					{blog.category.map((item, index) => (
 						<li key={item} className="inline">
 							{item}
-							<span className="sr-only">, </span>
+							{!(blog.category.length === index + 1) && (
+								<span>, </span>
+							)}
 						</li>
 					))}
 				</ul>
@@ -97,6 +99,8 @@ export default async function Blog({
 				>
 					{blog.title}
 				</h1>
+
+				<p className="text-center text-sm text-muted-foreground mt-6 mx-auto w-5/6">{blog.description}</p>
 
 				<div className="mt-8 text-muted-foreground text-sm flex md:flex-row flex-col justify-center gap-2 md:gap-6 items-center">
 					<address className="not-italic flex justify-center items-center gap-2">
@@ -161,14 +165,14 @@ export default async function Blog({
 
 				<div className="mb-8 border-t border-t-muted/5 flex items-center gap-2">
 					<ul
-						className="flex items-center gap-2"
+						className="flex-wrap flex items-center gap-2"
 						role="list"
 						aria-label="Tags"
 					>
 						{blog.tags.map((tag) => (
 							<li
 								key={tag}
-								className="px-3 rounded border border-muted/5 text-xs py-1 pt-0.5 bg-slate-800"
+								className="list-none px-3 rounded border border-muted/5 text-xs py-1 pt-0.5 bg-slate-800"
 							>
 								#{tag}
 							</li>
