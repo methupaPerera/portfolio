@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 
 import submitContact from "@/actions/submit-email";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -23,8 +22,6 @@ export default function ContactForm({
 	const recaptchaRef = useRef<ReCAPTCHA>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 
-	const searchParams = useSearchParams();
-
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
@@ -36,6 +33,7 @@ export default function ContactForm({
 			const token = await recaptchaRef.current?.executeAsync();
 
 			if (!token) {
+				setLoading(false);
 				return;
 			}
 
@@ -51,6 +49,8 @@ export default function ContactForm({
 	return (
 		<form
 			onSubmit={handleSubmit}
+			aria-labelledby="contact-form-title"
+			aria-busy={loading}
 			className="bg-slate-900 space-y-4 border border-muted/5 p-6 rounded-2xl shadow-[0_0_10px] shadow-primary/20"
 		>
 			<ReCAPTCHA
@@ -58,7 +58,11 @@ export default function ContactForm({
 				ref={recaptchaRef}
 				size="invisible"
 			/>
-			<p className="text-xl font-semibold">Send a Message</p>
+
+			<h2 id="contact-form-title" className="text-xl font-semibold">
+				Send a Message
+			</h2>
+
 			<div className="flex gap-4">
 				<div className="w-full space-y-1">
 					<label
@@ -74,6 +78,7 @@ export default function ContactForm({
 						name="name"
 						placeholder="Your name"
 						required
+						autoComplete="name"
 						className="mt-1"
 					/>
 				</div>
@@ -92,10 +97,12 @@ export default function ContactForm({
 						name="email"
 						placeholder="Your email"
 						required
+						autoComplete="email"
 						className="mt-1"
 					/>
 				</div>
 			</div>
+
 			<div className="space-y-1">
 				<label
 					htmlFor="subject"
@@ -113,6 +120,7 @@ export default function ContactForm({
 					className="mt-1"
 				/>
 			</div>
+
 			<div className="space-y-1">
 				<label
 					htmlFor="message"
@@ -132,24 +140,36 @@ export default function ContactForm({
 			</div>
 
 			{status === "success" && (
-				<div className="flex items-center  gap-1 rounded-lg bg-green-500/10 border border-green-500/30 p-3 text-sm text-green-400">
-					<TiTick /> Message sent successfully.
+				<div
+					role="status"
+					aria-live="polite"
+					className="flex items-center gap-1 rounded-lg bg-green-500/10 border border-green-500/30 p-3 text-sm text-green-400"
+				>
+					<TiTick aria-hidden="true" /> Message sent successfully.
 				</div>
 			)}
 
 			{status === "failed" && (
-				<div className="flex items-center gap-1 rounded-lg bg-red-500/10 border border-red-500/30 p-3 text-sm text-red-400">
-					<IoClose /> Something went wrong. Please try again later.
+				<div
+					role="alert"
+					aria-live="assertive"
+					className="flex items-center gap-1 rounded-lg bg-red-500/10 border border-red-500/30 p-3 text-sm text-red-400"
+				>
+					<IoClose aria-hidden="true" /> Something went wrong. Please
+					try again later.
 				</div>
 			)}
 
-			<Button className="w-full gap-2 py-6" type="submit">
+			<Button
+				className="w-full gap-2 py-6"
+				type="submit"
+				disabled={loading}
+			>
 				{loading ? (
 					<LoaderFive text="Loading..." />
 				) : (
 					<>
-						{" "}
-						<IoIosSend />
+						<IoIosSend aria-hidden="true" />
 						Send Message
 					</>
 				)}

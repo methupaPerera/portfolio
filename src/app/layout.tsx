@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 		"portfolio",
 		"youtuber",
 		"tech youtuber",
+		"blog",
 		"coding tutorials",
 		"full stack developer",
 		"Methupa Perera",
@@ -52,6 +53,8 @@ export const metadata: Metadata = {
 
 	icons: {
 		icon: "/profile.png",
+		shortcut: "/profile.png",
+		apple: "/profile.png",
 	},
 
 	robots: {

@@ -12,104 +12,92 @@ import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 export default function Works() {
-	// const [active, setActive] = useState<"all" | "personal" | "client">("all");
 	const [works, setWorks] = useState<WorkResponse | null>(null);
 
-	async function fetchWorks(page: number = 1) {
+	async function fetchWorks(page: number = 1, reset: boolean = false) {
 		fetch(
 			`${process.env.NEXT_PUBLIC_API_URL}/api/content?type=work&page=${page}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {
-				if (works) {
-					setWorks({
-						...works,
-						items: [...works.items, ...data.items],
+				setWorks((prev) => {
+					if (reset || !prev) {
+						return data;
+					}
+
+					return {
+						...prev,
+						items: [...prev.items, ...data.items],
 						page: data.page,
 						hasMore: data.hasMore,
-					});
-				} else {
-					setWorks(data);
-				}
+					};
+				});
 			});
 	}
 
 	useEffect(() => {
-		fetchWorks();
+		fetchWorks(works?.page ?? 1, true);
 	}, []);
 
 	return (
-		<div className="container">
-			<p className="mt-12 mx-auto mb-2 bg-primary/5 backdrop-blur-2xl text-primary w-fit px-3 py-1 pt-0.5 rounded-full border border-primary text-xs">
-				My Portfolio
-			</p>
-			<h1 className="mb-3 text-4xl font-bold text-center">
-				My{" "}
-				<span className="bg-linear-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-					Work
-				</span>
-			</h1>
+		<div className="container" aria-busy={!works}>
+			<header>
+				<p
+					role="status"
+					className="mt-12 mx-auto mb-2 bg-primary/5 backdrop-blur-2xl text-primary w-fit px-3 py-1 pt-0.5 rounded-full border border-primary text-xs"
+				>
+					My Portfolio
+				</p>
 
-			<p className="text-center w-5/6 mx-auto font-light text-sm mb-8 text-muted-foreground">
-				A collection of projects where I turn ideas into functional,
-				well-designed web applications. Each piece reflects my growth as
-				a developer, problem-solver, and creative thinker.
-			</p>
+				<h1 className="mb-3 text-4xl font-bold text-center">
+					My{" "}
+					<span className="bg-linear-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+						Work
+					</span>
+				</h1>
 
-			{/* <div className="flex justify-center items-center gap-2">
-				<span
-					onClick={() => setActive("all")}
-					className={cn(
-						"cursor-pointer duration-300 bg-slate-900 py-1 px-6 text-sm rounded-full border border-muted/5",
-						active === "all" && "bg-primary!",
-					)}
-				>
-					All
-				</span>
-				<span
-					onClick={() => setActive("personal")}
-					className={cn(
-						"cursor-pointer duration-300 bg-slate-900 py-1 px-6 text-sm rounded-full border border-muted/5",
-						active === "personal" && "bg-primary!",
-					)}
-				>
-					Personal
-				</span>
-				<span
-					onClick={() => setActive("client")}
-					className={cn(
-						"cursor-pointer duration-300 bg-slate-900 py-1 px-6 text-sm rounded-full border border-muted/5",
-						active === "client" && "bg-primary!",
-					)}
-				>
-					Client Projects
-				</span>
-			</div> */}
+				<p className="text-center w-5/6 mx-auto font-light text-sm mb-8 text-muted-foreground">
+					A collection of projects where I turn ideas into functional,
+					well-designed web applications. Each piece reflects my
+					growth as a developer, problem-solver, and creative thinker.
+				</p>
+			</header>
 
 			{!works && (
-				<div className="flex justify-center my-32">
+				<div
+					className="flex justify-center my-32"
+					role="status"
+					aria-live="polite"
+				>
 					<LoaderOne />
 				</div>
 			)}
 
-			<div className="my-10 grid md:grid-cols-2 gap-8">
-				{works &&
-					works.items.map((work, i) => (
-						<motion.div
-							key={work.slug}
-							initial={{ opacity: 0, y: 30 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true, margin: "-50px" }}
-							transition={{
-								duration: 0.5,
-								ease: "easeOut",
-								delay: i * 0.08,
-							}}
-						>
-							<WorkCard work={work} />
-						</motion.div>
-					))}
-			</div>
+			<section className="my-10" aria-labelledby="projects-title">
+				<h2 id="projects-title" className="sr-only">
+					Projects
+				</h2>
+
+				<ul className="grid md:grid-cols-2 gap-8" role="list">
+					{works &&
+						works.items.map((work, i) => (
+							<li key={work.slug}>
+								<motion.div
+									initial={{ opacity: 0, y: 30 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									viewport={{ once: true, margin: "-50px" }}
+									transition={{
+										duration: 0.5,
+										ease: "easeOut",
+										delay: i * 0.08,
+									}}
+								>
+									<WorkCard work={work} />
+								</motion.div>
+							</li>
+						))}
+				</ul>
+			</section>
 
 			<div className="flex justify-center mb-8">
 				{works && (
@@ -118,8 +106,9 @@ export default function Works() {
 						onClick={() => fetchWorks(works.page + 1)}
 						className="rounded-full font-normal"
 						disabled={!works.hasMore}
+						aria-label="Load more projects"
 					>
-						Load More Projects <ChevronDown />
+						Load More Projects <ChevronDown aria-hidden="true" />
 					</Button>
 				)}
 			</div>

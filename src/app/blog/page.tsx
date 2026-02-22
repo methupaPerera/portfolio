@@ -17,7 +17,9 @@ export default function Blogs() {
 
 	async function fetchBlogs(page: number = 1, reset: boolean = false) {
 		fetch(
-			`${process.env.NEXT_PUBLIC_API_URL}/api/content?type=blog&page=${page}&category=${filter}`,
+			`${process.env.NEXT_PUBLIC_API_URL}/api/content?type=blog&page=${page}&category=${encodeURIComponent(
+				filter,
+			)}`,
 		)
 			.then((res) => res.json())
 			.then((data) => {
@@ -37,41 +39,56 @@ export default function Blogs() {
 	}
 
 	useEffect(() => {
-		fetchBlogs();
-	}, []);
-
-	useEffect(() => {
 		fetchBlogs(blogs?.page ?? 1, true);
 	}, [filter]);
 
 	return (
-		<div className="mb-12 container">
-			<h1 className="mt-12 text-4xl font-bold">
-				Writing <span className="text-primary">&</span> Thoughts
-			</h1>
+		<div className="mb-12 container" aria-busy={!blogs}>
+			<header>
+				<h1 className="mt-12 text-4xl font-bold">
+					Writing <span className="text-primary">&</span> Thoughts
+				</h1>
 
-			<p className="mb-8 pt-2 text-sm text-muted-foreground w-full md:w-5/6">
-				Exploring the frotiers of development, and scalable
-				architecture. A collection of tutorials, case studies and
-				personal insights.
-			</p>
+				<p className="mb-8 pt-2 text-sm text-muted-foreground w-full md:w-5/6">
+					Thoughts, lessons, and ideas from exploring creativity,
+					growth, and building meaningful experiences in a changing
+					digital world.
+				</p>
+			</header>
 
 			{!blogs && (
-				<div className="flex justify-center my-32">
+				<div
+					className="flex justify-center my-32"
+					role="status"
+					aria-live="polite"
+				>
 					<LoaderOne />
 				</div>
 			)}
 
-			{blogs && <BlogCardExtended blog={blogs.items[0]} />}
+			{blogs && (
+				<section aria-label="Featured post">
+					<BlogCardExtended blog={blogs.items[0]} />
+				</section>
+			)}
 
 			<div className="mt-8 w-full grid grid-cols-1 md:grid-cols-4 gap-8">
-				<div className="order-2 md:order-1 grid grid-cols-1 gap-4 md:col-span-3">
-					{blogs &&
-						blogs.items
-							.slice(1)
-							.map((blog) => (
-								<BlogCard key={blog.slug} blog={blog} />
+				<section
+					className="order-2 md:order-1 grid grid-cols-1 gap-4 md:col-span-3"
+					aria-labelledby="all-posts-title"
+				>
+					<h2 id="all-posts-title" className="sr-only">
+						All posts
+					</h2>
+
+					<ul className="grid grid-cols-1 gap-4" role="list">
+						{blogs &&
+							blogs.items.slice(1).map((blog) => (
+								<li key={blog.slug}>
+									<BlogCard blog={blog} />
+								</li>
 							))}
+					</ul>
 
 					<div className="flex justify-center mt-4">
 						{blogs && (
@@ -80,37 +97,46 @@ export default function Blogs() {
 								onClick={() => fetchBlogs(blogs.page + 1)}
 								className="rounded-full font-normal"
 								disabled={!blogs.hasMore}
+								aria-label="Load more blog posts"
 							>
-								Load More Blogs <ChevronDown />
+								Load More Blogs{" "}
+								<ChevronDown aria-hidden="true" />
 							</Button>
 						)}
 					</div>
-				</div>
+				</section>
 
-				<div className="order-1 md:order-2 w-full md:col-span-1 min-w-0">
-					<div className="w-full bg-slate-900 border border-muted/5 p-4 rounded-lg">
-						<p className="font-semibold">Categories</p>
+				<aside className="order-1 md:order-2 w-full md:col-span-1 min-w-0">
+					<nav
+						className="w-full bg-slate-900 border border-muted/5 p-4 rounded-lg"
+						aria-labelledby="categories-title"
+					>
+						<h2 id="categories-title" className="font-semibold">
+							Categories
+						</h2>
 
 						<div className="flex flex-wrap gap-1.5 mt-3">
 							{blogs &&
 								["", ...blogs.filter.availableCategories].map(
 									(item) => (
-										<p
+										<button
 											key={item}
+											type="button"
 											className={cn(
 												"cursor-pointer capitalize w-fit border border-muted/5 bg-primary/10 px-3 pt-0.5 pb-1 text-xs rounded-full transition",
 												filter === item &&
 													"bg-primary text-white",
 											)}
+											aria-pressed={filter === item}
 											onClick={() => setFilter(item)}
 										>
 											{item || "Any"}
-										</p>
+										</button>
 									),
 								)}
 						</div>
-					</div>
-				</div>
+					</nav>
+				</aside>
 			</div>
 		</div>
 	);
