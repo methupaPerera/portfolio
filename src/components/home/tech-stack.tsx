@@ -4,7 +4,7 @@ import { MdTerminal } from "react-icons/md";
 
 export default function TechStack() {
 	return (
-		<section className="border-t border-muted/5 bg-background-dark mt-12 py-16">
+		<section className="border-t border-muted/5 bg-background-dark py-16">
 			<div className="container">
 				<h2 className="text-center mb-2 text-4xl font-bold">
 					Tech{" "}

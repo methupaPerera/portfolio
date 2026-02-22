@@ -11,7 +11,7 @@ export default async function Work() {
 	const works = getPage("work", 1, 2);
 
 	return (
-		<section className="border-t border-muted/5 py-16 bg-background-dark">
+		<section className="border-y border-muted/5 py-16 bg-background-dark">
 			<div className="container">
 				<div className="w-5/6 mb-8 ">
 					<h2 className="font-bold text-4xl mb-2 bg-linear-to-r from-primary to-purple-500 bg-clip-text text-transparent">

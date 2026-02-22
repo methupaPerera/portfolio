@@ -3,15 +3,17 @@ import Blog from "@/components/home/blog";
 import Hero from "@/components/home/hero";
 import TechStack from "@/components/home/tech-stack";
 import Work from "@/components/home/work";
+import YTCTA from "@/components/home/yt-cta";
 import ParticlesBackground from "@/components/particles";
 
 export default function Page() {
 	return (
 		<div className="relative z-1 overflow-x-hidden">
 			<Hero />
+			<YTCTA />
+			<Blog />
 			<TechStack />
 			<Work />
-			<Blog />
 			<div className="container">
 				<CTA />
 			</div>
