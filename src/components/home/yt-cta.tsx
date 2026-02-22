@@ -3,13 +3,10 @@ import React from "react";
 import { FaYoutube } from "react-icons/fa6";
 import { buttonVariants } from "../ui/button";
 import VideoContainer, { YTVideo } from "../video-container";
+import { getYtInfo } from "@/lib/yt-info";
 
 export default async function YTCTA() {
-	const { subscriberCount: subscribers, videos } = await (
-		await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/yt-info")
-	).json();
-
-	console.log(videos);
+	const { subscriberCount: subscribers, videos } = await getYtInfo();
 
 	return (
 		<div className="container my-16">
@@ -46,9 +43,10 @@ export default async function YTCTA() {
 				</div>
 
 				<div className="mt-8 grid md:grid-cols-3">
-					{videos.map((video: YTVideo) => (
-						<VideoContainer key={video.id} video={video} />
-					))}
+					{videos &&
+						videos.map((video: YTVideo) => (
+							<VideoContainer key={video.id} video={video} />
+						))}
 				</div>
 			</div>
 		</div>

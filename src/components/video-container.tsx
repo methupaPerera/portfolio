@@ -6,7 +6,7 @@ export type YTVideo = {
 	id: string;
 	title: string;
 	url: string;
-	thumbnail: string;
+	thumbnail: string | null;
 	publishedAt: string;
 };
 
@@ -19,7 +19,7 @@ export default function VideoContainer({ video }: { video: YTVideo }) {
 		>
 			<div className="relative">
 				<Image
-					src={video.thumbnail}
+					src={video.thumbnail || ""}
 					width={400}
 					height={400}
 					alt={video.title}
