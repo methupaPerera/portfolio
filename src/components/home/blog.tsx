@@ -14,7 +14,7 @@ export default function Blog() {
 			aria-labelledby="latest-writing-title"
 		>
 			<div className="container">
-				<header className="flex flex-col items-end ms-auto w-5/6 mb-12">
+				<header className="flex flex-col items-start w-5/6 mb-12">
 					<h2
 						id="latest-writing-title"
 						className="text-4xl font-bold mb-2"
@@ -31,7 +31,7 @@ export default function Blog() {
 					</p>
 				</header>
 
-				<ul className="grid md:grid-cols-2 gap-8" role="list">
+				<ul className="grid gap-8" role="list">
 					{blogs.items.map((blog) => (
 						<li key={blog.slug}>
 							{/* @ts-ignore */}

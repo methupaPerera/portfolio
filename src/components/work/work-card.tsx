@@ -30,7 +30,7 @@ export default function WorkCard({ work }: { work: Work }) {
 			<div className="pt-4 px-6 pb-6">
 				<h3 className="text-lg font-semibold mb-1">{work.title}</h3>
 
-				<p className="text-sm text-muted-foreground">
+				<p className="text-sm text-muted-foreground line-clamp-3">
 					{work.description}
 				</p>
 

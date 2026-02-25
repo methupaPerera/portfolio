@@ -130,7 +130,7 @@ export default function Footer() {
 							href="/contact"
 							aria-label="Send a message via the contact page"
 						>
-							Send a Message <ChevronRight aria-hidden="true" />
+							Send a Message
 						</Link>
 					</address>
 				</section>
