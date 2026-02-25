@@ -100,9 +100,11 @@ export default async function Blog({
 					{blog.title}
 				</h1>
 
-				<p className="text-center text-sm text-muted-foreground mt-6 mx-auto w-5/6">{blog.description}</p>
+				<p className="text-center text-sm text-muted-foreground mt-6 mx-auto w-5/6">
+					{blog.description}
+				</p>
 
-				<div className="mt-8 text-muted-foreground text-sm flex md:flex-row flex-col justify-center gap-2 md:gap-6 items-center">
+				<div className="mt-8 text-muted-foreground text-sm flex md:flex-row flex-col justify-center gap-2 md:gap-12 items-center">
 					<address className="not-italic flex justify-center items-center gap-2">
 						<Image
 							src="/profile.jpg"
@@ -114,26 +116,24 @@ export default async function Blog({
 						<p className="text-muted">Methupa Perera</p>
 					</address>
 
-					<span aria-hidden="true">•</span>
+					<div className="flex gap-8 md:gap-12">
+						<p>
+							<time dateTime={blog.posted_date}>
+								{blog.posted_date}
+							</time>
+						</p>
 
-					<p>
-						<time dateTime={blog.posted_date}>
-							{blog.posted_date}
-						</time>
-					</p>
-
-					<span aria-hidden="true">•</span>
-
-					<p
-						className="flex items-center gap-1.5"
-						aria-label={`Estimated reading time: ${blog.read}`}
-					>
-						<FaRegClock
-							aria-hidden="true"
-							className="text-primary"
-						/>
-						{blog.read} read
-					</p>
+						<p
+							className="flex items-center gap-1.5"
+							aria-label={`Estimated reading time: ${blog.read}`}
+						>
+							<FaRegClock
+								aria-hidden="true"
+								className="text-primary"
+							/>
+							{blog.read} read
+						</p>
+					</div>
 				</div>
 			</header>
 
