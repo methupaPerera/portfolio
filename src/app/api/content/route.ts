@@ -16,7 +16,6 @@ export async function GET(req: NextRequest) {
 	const page = Number(req.nextUrl.searchParams.get("page") ?? "1");
 	const limit = Number(req.nextUrl.searchParams.get("limit") ?? "6");
 
-	// category can be "tech" or "tech,music"
 	const category = req.nextUrl.searchParams.get("category") ?? "";
 	const categoryMode =
 		(req.nextUrl.searchParams.get("categoryMode") as

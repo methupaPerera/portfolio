@@ -199,7 +199,7 @@ export function getPage(
 	).sort();
 
 	return {
-		items: slice,
+		items: slice.reverse(),
 		page: safePage,
 		limit: safeLimit,
 		total,
