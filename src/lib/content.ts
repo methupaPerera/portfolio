@@ -57,6 +57,28 @@ function computeSignature(dir: string, files: string[]) {
 	return parts.join("|");
 }
 
+function toTime(value: unknown): number | null {
+	if (!value) return null;
+
+	if (typeof value === "number" && Number.isFinite(value)) {
+		return value;
+	}
+
+	if (typeof value === "string") {
+		const s = value.trim();
+		if (!s) return null;
+		const t = Date.parse(s);
+		return Number.isFinite(t) ? t : null;
+	}
+
+	if (value instanceof Date) {
+		const t = value.getTime();
+		return Number.isFinite(t) ? t : null;
+	}
+
+	return null;
+}
+
 function buildIndex(type: ContentType): IndexCache {
 	const dir = getDir(type);
 	const files = safeReadDir(dir);
@@ -80,15 +102,24 @@ function buildIndex(type: ContentType): IndexCache {
 		};
 	});
 
+	// 🔥 Sort by created_date (newest first)
 	items.sort((a, b) => {
-		const da = a.frontmatter.date ?? "";
-		const db = b.frontmatter.date ?? "";
+		const ca = toTime(a.frontmatter.created_date);
+		const cb = toTime(b.frontmatter.created_date);
 
-		if (da && db) return da < db ? 1 : -1;
-		if (da && !db) return -1;
-		if (!da && db) return 1;
+		if (ca !== null && cb !== null) return cb - ca;
+		if (ca !== null && cb === null) return -1;
+		if (ca === null && cb !== null) return 1;
 
-		return a.mtimeMs < b.mtimeMs ? 1 : -1;
+		// Optional fallback to "date"
+		const da = toTime(a.frontmatter.date);
+		const db = toTime(b.frontmatter.date);
+		if (da !== null && db !== null) return db - da;
+		if (da !== null && db === null) return -1;
+		if (da === null && db !== null) return 1;
+
+		// Final fallback to filesystem mtime
+		return b.mtimeMs - a.mtimeMs;
 	});
 
 	const built = { signature, items };
@@ -105,10 +136,6 @@ function normalizeToken(x: unknown): string | null {
 }
 
 function getDocCategories(frontmatter: Record<string, any>): string[] {
-	// supports:
-	// category: "tech"
-	// categories: ["tech", "music"]
-	// categories: "tech, music"
 	const raw =
 		frontmatter.categories ??
 		frontmatter.category ??
@@ -136,12 +163,14 @@ type CategoryMode = "any" | "all";
 
 function parseCategoryFilter(input: unknown): string[] {
 	if (!input) return [];
+
 	if (Array.isArray(input)) {
 		return input
 			.flatMap((v) => String(v).split(","))
 			.map(normalizeToken)
 			.filter((x): x is string => Boolean(x));
 	}
+
 	return String(input)
 		.split(",")
 		.map(normalizeToken)
@@ -155,8 +184,8 @@ export function getPage(
 	page: number,
 	limit: number,
 	opts?: {
-		categories?: string[] | string; // "tech" or ["tech","music"] or "tech,music"
-		categoryMode?: CategoryMode; // any | all
+		categories?: string[] | string;
+		categoryMode?: CategoryMode;
 	},
 ) {
 	const { items } = buildIndex(type);
@@ -169,7 +198,6 @@ export function getPage(
 	const selected = parseCategoryFilter(opts?.categories);
 	const mode: CategoryMode = opts?.categoryMode === "all" ? "all" : "any";
 
-	// Filter first, then paginate
 	const filtered = selected.length
 		? items.filter((x) => {
 				const cats = getDocCategories(x.frontmatter);
@@ -193,22 +221,19 @@ export function getPage(
 
 	const hasMore = end < total;
 
-	// Optional: useful for filter UI
 	const availableCategories = Array.from(
 		new Set(items.flatMap((x) => getDocCategories(x.frontmatter))),
 	).sort();
 
 	return {
-		items: slice.reverse(),
+		items: slice,
 		page: safePage,
 		limit: safeLimit,
 		total,
 		hasMore,
 		nextPage: hasMore ? safePage + 1 : null,
-
-		// meta for UI
 		filter: {
-			categories: selected, // normalized
+			categories: selected,
 			categoryMode: mode,
 			availableCategories,
 		},
