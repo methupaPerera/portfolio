@@ -24,7 +24,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
 					{blog.category.map((item) => (
 						<li key={item} className="inline">
 							{item}
-							<span className="sr-only">, </span>
+							<span>, </span>
 						</li>
 					))}
 				</ul>
