@@ -21,10 +21,12 @@ export default function BlogCard({ blog }: { blog: Blog }) {
 					className="uppercase font-semibold text-primary text-xs mb-1"
 					role="list"
 				>
-					{blog.category.map((item) => (
+					{blog.category.map((item, index) => (
 						<li key={item} className="inline">
 							{item}
-							<span>, </span>
+							{index + 1 !== blog.category.length && (
+								<span>, </span>
+							)}
 						</li>
 					))}
 				</ul>
