@@ -1,0 +1,54 @@
+---
+slug: "beginner-devops"
+title: "How much DevOps should you know as a beginner web developer?"
+description: "In this article, I'll break down the essential DevOps concepts every beginner web developer should understand, from deployment basics and CI/CD to server management and cloud fundamentals, without overwhelming you with enterprise-level complexity."
+category:
+  - devops
+  - web
+  - cloud
+tags:
+  - webdevelopment
+  - devops
+  - learning
+  - devopsconcepts
+  - cloud
+  - docker
+  - vpshosting
+image: "/blog/beginner-devops/cover.png"
+read: "5 mins"
+posted_date: "Feb 26, 2026"
+---
+
+When I completed my first client project with my friend, I just knew how to code stuff and deploy it on random free 
+platforms like Vercel, Netlify, etc. So when it came to the deployment phase, we hit a knowledge and experience barrier.
+
+We tried different cloud providers like Hostinger, OVH, DigitalOcean, and of course, AWS.
+
+Finally, we managed to get the job done with AWS. In the process, we needed some knowledge about DevOps, which we spent so much time 
+learning. At first, we got the job done with the help of AI assistants. But yes, I got more comfortable with this stuff after 
+learning these concepts and tools in DevOps.
+
+## 1. Linux Commands
+
+Almost all the time, you'll work with servers that have Linux installed. So you should know the basic commands, along with 
+creating user groups, giving permissions, etc., which will be used in the Dockerfile that I explain below.
+
+## 2. Docker
+
+First of all, you should learn this. This is the most used containerization technology when deploying applications.  
+Before deploying any web app, you should containerize it. When learning it, you'll encounter terms such as:
+
+- Containers  
+- Volumes  
+- Images  
+- Dockerfile  
+- Docker Cloud  
+
+## 3. GitHub Actions
+
+After containerizing and deploying a web app on a VPS, you have to redo the same process even for small changes in the app.  
+But if you set up GitHub Actions, you can automate all that work peacefully. This can be done by creating a `.github/workflows` 
+folder inside the root of your project. In that folder, you can write the actions in `.yaml` files.
+
+> Since I’m assuming this will be read by beginner developers, I didn’t include terms such as CI/CD pipelines and other advanced topics.  
+> So if you are a beginner, just learn the basics of these and push yourself ahead.
