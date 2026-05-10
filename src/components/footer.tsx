@@ -107,7 +107,7 @@ export default function Footer() {
 								<FaPhone />
 							</span>
 							<Link
-								href="tel:+94769437742"
+								href="tel:+94767964800"
 								className="hover:underline"
 							>
 								+94 76 943 7742
