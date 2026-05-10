@@ -1,0 +1,145 @@
+---
+slug: "instagram-followers"
+title: "Wanna Know Who Unfollowed You on Instagram?"
+description: "In this blog post, I’ll show you how to find out who unfollowed you on Instagram after you followed them back. Because apparently, basic courtesy is too much to ask."
+category:
+    - python
+tags:
+    - python
+    - pythonscripts
+    - instagram
+    - followers
+    - unfollowers
+    - pythonlogic
+    - programming
+image: "/blog/instagram-followers/cover.png"
+read: "5 mins"
+posted_date: "April 9, 2026"
+created_date: "2026-04-09"
+---
+
+First, we need to get your Instagram data. No sketchy third-party apps, because they can get your account banned.
+Just your own data.
+
+## Step 1: Download Your Instagram Data
+
+Go to Instagram settings and request your data download. When selecting what to download:
+
+- Only select Followers and Following
+- Choose JSON format (important)
+- Ignore everything else otherwise it'll take forever
+
+Once Instagram sends you the file, download it and unzip it.
+
+## Step 2: Find the Right Files
+
+After extracting the zip open the folder and navigate to:
+
+connections/followers_and_following
+
+Inside, you should see:
+
+followers_1.json
+following.json
+
+If you don’t see these, congratulations, you downloaded the wrong thing.
+
+## Step 3: Create a Python Script
+
+Inside the same folder, create a file called process.py. Name it whatever you want.
+
+## Step 4: The Code (We’ll Break It Down)
+
+Here’s the full script first:
+
+```
+import json
+
+followers_str = open("followers_1.json", "r")
+followers = json.load(followers_str)
+follower_names = []
+
+for follower in followers:
+name = follower["string_list_data"][0]["value"]
+follower_names.append(name)
+
+followings_str = open("following.json", "r")
+followings = json.load(followings_str)
+following_names = []
+
+for following in followings["relationships_following"]:
+name = following["title"]
+following_names.append(name)
+
+for following_name in following_names:
+if following_name not in follower_names:
+print(following_name)
+```
+
+Now let’s go through it piece by piece so it actually makes sense.
+
+### Step 4.1: Load Your Followers
+
+```python
+followers_str = open("followers_1.json", "r")
+followers = json.load(followers_str)
+follower_names = []
+```
+
+Opens your followers file, converts JSON into usable Python data, and prepares a list to store usernames.
+
+### Step 4.2: Extract Follower Names
+
+```python
+for follower in followers:
+name = follower["string_list_data"][0]["value"]
+follower_names.append(name)
+```
+
+This loop goes through each follower, extracts their username, and stores it in a list.
+
+### Step 4.3: Load Who You Follow
+
+```python
+followings_str = open("following.json", "r")
+followings = json.load(followings_str)
+following_names = []
+```
+
+Same idea as before, but now for accounts you follow.
+
+### Step 4.4: Extract Following Names
+
+```python
+for following in followings["relationships_following"]:
+name = following["title"]
+following_names.append(name)
+```
+
+This builds a list of everyone you follow.
+
+### Step 4.5: Find Who Unfollowed You
+
+```python
+for following_name in following_names:
+if following_name not in follower_names:
+print(following_name)
+```
+
+This is the important part:
+
+- It checks who you follow
+- Compares it with who follows you back
+- Prints the ones who don’t
+
+Basically, your “fake friends” list.
+
+## Final Output
+
+Run the script: python process.py
+
+And it will print all the accounts that you follow, but they don’t follow you back.
+
+You now have a simple, no-nonsense way to find out who didn’t follow you back using your own Instagram data.
+No shady apps. No risking your account. Just a bit of Python doing the uncomfortable truth-checking for you.
+Let's meet in another blog post. Ciao!!!
