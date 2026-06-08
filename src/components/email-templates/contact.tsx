@@ -93,7 +93,7 @@ export function EmailTemplate({
 						color: "#64748b",
 					}}
 				>
-					Sent from GeekyStory Contact Form
+					Sent from methupa.dev Contact Form
 				</p>
 			</div>
 		</div>

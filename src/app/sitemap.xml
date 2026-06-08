@@ -5,42 +5,42 @@
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <url>
-    <loc>https://www.geekystory.com/</loc>
+    <loc>https://www.methupa.vercel.app/</loc>
     <lastmod>2026-02-22T07:16:28+00:00</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://www.geekystory.com/about</loc>
+    <loc>https://www.methupa.vercel.app/about</loc>
     <lastmod>2026-02-22T07:16:28+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.geekystory.com/work</loc>
+    <loc>https://www.methupa.vercel.app/work</loc>
     <lastmod>2026-02-22T07:16:28+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.geekystory.com/blog</loc>
+    <loc>https://www.methupa.vercel.app/blog</loc>
     <lastmod>2026-02-22T07:16:28+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.geekystory.com/contact</loc>
+    <loc>https://www.methupa.vercel.app/contact</loc>
     <lastmod>2026-02-22T07:16:28+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.geekystory.com/blog/frontend-tools</loc>
+    <loc>https://www.methupa.vercel.app/blog/frontend-tools</loc>
     <lastmod>2026-02-22T07:16:28+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.geekystory.com/work/libsys</loc>
+    <loc>https://www.methupa.vercel.app/work/libsys</loc>
     <lastmod>2026-02-22T07:16:28+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.geekystory.com/work/edens-garden</loc>
+    <loc>https://www.methupa.vercel.app/work/edens-garden</loc>
     <lastmod>2026-02-22T07:16:28+00:00</lastmod>
     <priority>0.80</priority>
   </url>

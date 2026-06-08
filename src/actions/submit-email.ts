@@ -60,7 +60,7 @@ export default async function submitContact(formData: FormData) {
 	}
 
 	const { error } = await resend.emails.send({
-		from: `${name} <contact@geekystory.com>`,
+		from: `${name} <contact@methupa.vercel.app>`,
 		to: "methupaperera48@gmail.com",
 		subject,
 		react: EmailTemplate({ name, email, subject, message }),

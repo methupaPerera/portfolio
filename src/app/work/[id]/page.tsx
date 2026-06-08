@@ -22,10 +22,10 @@ export async function generateMetadata({
 	try {
 		const work = getDocBySlug<Work>("work", id);
 
-		const title = `${work.title} | GeekyStory`;
+		const title = `${work.title} | methupa.dev`;
 		const description = work.description;
 
-		const url = `https://geekystory.com/work/${work.slug}`;
+		const url = `https://methupa.vercel.app/work/${work.slug}`;
 
 		return {
 			title,

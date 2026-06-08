@@ -28,7 +28,7 @@ export default async function YTCTA() {
 					<h2 id="ytcta-title" className="text-4xl font-bold">
 						Join the{" "}
 						<span className="bg-linear-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-							GeekyStory
+							methupa.dev
 						</span>{" "}
 						Community
 					</h2>
@@ -44,10 +44,10 @@ export default async function YTCTA() {
 					aria-label="YouTube channel links"
 				>
 					<Link
-						href="https://www.youtube.com/@geekystory"
+						href="https://www.youtube.com/@methupa.dev"
 						target="_blank"
 						rel="noopener noreferrer"
-						aria-label="Visit GeekyStory on YouTube (opens in a new tab)"
+						aria-label="Visit methupa.dev on YouTube (opens in a new tab)"
 						className={buttonVariants({
 							className: "bg-red-500 hover:bg-red-500/90",
 						})}

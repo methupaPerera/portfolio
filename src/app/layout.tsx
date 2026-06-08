@@ -37,11 +37,11 @@ export const metadata: Metadata = {
 		title: "Methupa Perera - Stay Curious",
 		description:
 			"This is the place to explore ideas, creativity, and personal growth, while sharing real experiences, lessons learned, and the mindset behind building a meaningful and focused life.",
-		url: "https://geekystory.com",
+		url: "https://methupa.vercel.app",
 		siteName: "Methupa Perera",
 		images: [
 			{
-				url: "https://geekystory.com/og.png",
+				url: "https://methupa.vercel.app/og.png",
 				width: 1280,
 				height: 720,
 				alt: "Methupa Perera Website Preview",
@@ -54,6 +54,10 @@ export const metadata: Metadata = {
 		icon: "/favicon.png",
 		shortcut: "/favicon.png",
 		apple: "/favicon.png",
+	},
+
+	verification: {
+		google: "kLGUA2slHUQiRZa7QEFGvjrZ3Fvl6E0ut8ebqc3H-mw",
 	},
 
 	robots: {
