@@ -3,45 +3,54 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
 
   <url>
-    <loc>https://www.methupa.vercel.app/</loc>
-    <lastmod>2026-02-22T07:16:28+00:00</lastmod>
+    <loc>https://methupa.vercel.app/</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://www.methupa.vercel.app/about</loc>
-    <lastmod>2026-02-22T07:16:28+00:00</lastmod>
+    <loc>https://methupa.vercel.app/about</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.methupa.vercel.app/work</loc>
-    <lastmod>2026-02-22T07:16:28+00:00</lastmod>
+    <loc>https://methupa.vercel.app/work</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.methupa.vercel.app/blog</loc>
-    <lastmod>2026-02-22T07:16:28+00:00</lastmod>
+    <loc>https://methupa.vercel.app/blog</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.methupa.vercel.app/contact</loc>
-    <lastmod>2026-02-22T07:16:28+00:00</lastmod>
+    <loc>https://methupa.vercel.app/contact</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.methupa.vercel.app/blog/frontend-tools</loc>
-    <lastmod>2026-02-22T07:16:28+00:00</lastmod>
+    <loc>https://methupa.vercel.app/blog/instagram-followers</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.methupa.vercel.app/work/libsys</loc>
-    <lastmod>2026-02-22T07:16:28+00:00</lastmod>
+    <loc>https://methupa.vercel.app/blog/beginner-devops</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://www.methupa.vercel.app/work/edens-garden</loc>
-    <lastmod>2026-02-22T07:16:28+00:00</lastmod>
+    <loc>https://methupa.vercel.app/work/edens-garden</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
     <priority>0.80</priority>
   </url>
+  <url>
+    <loc>https://methupa.vercel.app/work/libsys</loc>
+    <lastmod>2026-06-08T14:28:20+00:00</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+
 </urlset>
