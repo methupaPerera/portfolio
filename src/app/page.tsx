@@ -10,9 +10,9 @@ export default function Page() {
 	return (
 		<div className="relative z-1 overflow-x-hidden">
 			<Hero />
-			<YTCTA />
-			<Blog />
 			<TechStack />
+			{/* <YTCTA /> */}
+			<Blog />
 			<Work />
 			<div className="container">
 				<CTA />

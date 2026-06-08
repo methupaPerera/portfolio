@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Geeky Story - Stay Curious | Work",
+	title: "Methupa Perera - Stay Curious | Work",
 
 	robots: {
 		index: true,

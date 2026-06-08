@@ -20,8 +20,8 @@ export default function Footer() {
 					aria-label="Brand"
 				>
 					<p className="text-lg font-bold">
-						<span className="text-muted">Geeky</span>
-						<span className="text-primary">Story</span>
+						<span className="text-muted">methupa</span>
+						<span className="text-primary">.dev</span>
 					</p>
 
 					<p className="text-center md:text-start mt-2 text-sm text-muted-foreground max-w-sm">
@@ -110,7 +110,7 @@ export default function Footer() {
 								href="tel:+94767964800"
 								className="hover:underline"
 							>
-								+94 76 943 7742
+								+94 76 796 4800
 							</Link>
 						</p>
 
@@ -137,7 +137,7 @@ export default function Footer() {
 			</div>
 
 			<div className="mt-6 text-sm text-center text-muted-foreground border-t border-muted/5 py-4">
-				&copy;2026 GeekyStory. All rights reserved.
+				Designed and Developed by Methupa Perera ❤️
 			</div>
 		</footer>
 	);

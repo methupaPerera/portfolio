@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Geeky Story - Stay Curious",
+	title: "Methupa Perera - Stay Curious",
 	description:
 		"This is the place to explore ideas, creativity, and personal growth, while sharing real experiences, lessons learned, and the mindset behind building a meaningful and focused life.",
 	keywords: [
@@ -29,23 +29,22 @@ export const metadata: Metadata = {
 		"coding tutorials",
 		"full stack developer",
 		"Methupa Perera",
-		"Geeky Story",
 	],
 
-	authors: [{ name: "Methupa Perera" }, { name: "Geeky Story" }],
+	authors: [{ name: "Methupa Perera" }, { name: "Methupa Perera" }],
 
 	openGraph: {
-		title: "Geeky Story - Stay Curious",
+		title: "Methupa Perera - Stay Curious",
 		description:
 			"This is the place to explore ideas, creativity, and personal growth, while sharing real experiences, lessons learned, and the mindset behind building a meaningful and focused life.",
 		url: "https://geekystory.com",
-		siteName: "Geeky Story",
+		siteName: "Methupa Perera",
 		images: [
 			{
 				url: "https://geekystory.com/og.png",
 				width: 1280,
 				height: 720,
-				alt: "Geeky Story Website Preview",
+				alt: "Methupa Perera Website Preview",
 			},
 		],
 		type: "website",

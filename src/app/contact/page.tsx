@@ -10,7 +10,7 @@ import { FaInstagram } from "react-icons/fa6";
 import { MdLocationPin } from "react-icons/md";
 
 export const metadata: Metadata = {
-	title: "Geeky Story - Stay Curious | Contact",
+	title: "Methupa Perera - Stay Curious | Contact",
 
 	robots: {
 		index: true,

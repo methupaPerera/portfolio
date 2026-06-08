@@ -10,7 +10,7 @@ export default function Blog() {
 
 	return (
 		<section
-			className="bg-background-dark border-y border-muted/5 py-16"
+			className="border-y border-muted/5 py-16"
 			aria-labelledby="latest-writing-title"
 		>
 			<div className="container">

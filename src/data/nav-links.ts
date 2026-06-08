@@ -8,6 +8,10 @@ const navLinks = [
 		label: "About",
 	},
 	{
+		link: "/#skills",
+		label: "Skills",
+	},
+	{
 		link: "/work",
 		label: "Work",
 	},

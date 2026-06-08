@@ -45,7 +45,7 @@ export async function generateMetadata({
 						alt: blog.title,
 					},
 				],
-				authors: ["Methupa Perera", "Geeky Story"],
+				authors: ["Methupa Perera", "Methupa Perera"],
 				publishedTime: blog.posted_date,
 				tags: blog.tags,
 			},

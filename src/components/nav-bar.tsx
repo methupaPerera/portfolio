@@ -33,8 +33,8 @@ export default function NavBar() {
 			<div className="backdrop-blur-md container flex justify-between items-center h-full">
 				<Link href="/">
 					<h1 className="text-lg font-bold">
-						<span className="text-muted">Geeky</span>
-						<span className="text-primary">Story</span>
+						<span className="text-muted">methupa</span>
+						<span className="text-primary">.dev</span>
 					</h1>
 				</Link>
 

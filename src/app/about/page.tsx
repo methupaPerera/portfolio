@@ -10,7 +10,7 @@ import Link from "next/link";
 import { FaArrowTrendUp, FaLocationDot } from "react-icons/fa6";
 
 export const metadata: Metadata = {
-	title: "Geeky Story - Stay Curious | About",
+	title: "Methupa Perera - Stay Curious | About",
 
 	robots: {
 		index: true,
