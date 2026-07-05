@@ -71,37 +71,42 @@ export default function NavBar() {
 					{open ? <HiX size={22} /> : <HiMenuAlt3 size={22} />}
 				</Button>
 			</div>
-
-			<AnimatePresence>
+			<AnimatePresence mode="wait">
 				{open && (
 					<>
 						<motion.div
-							key="drawer"
-							className="fixed top-15.75 left-0 right-0 z-50 md:hidden border-b border-muted/10 bg-background-dark/80"
-							initial={{ height: 0, opacity: 0 }}
-							animate={{ height: "auto", opacity: 1 }}
-							exit={{ height: 0, opacity: 0 }}
-							transition={{ duration: 0.25 }}
-						>
-							<div className="absolute inset-0 backdrop-blur-lg bg-background-dark/40 supports-backdrop-filter:bg-background-dark/30" />
+							key="backdrop"
+							className="fixed top-16 inset-0 z-40 md:hidden bg-black/40 backdrop-blur-sm"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.2 }}
+							onClick={() => setOpen(false)}
+						/>
 
-							<div className="relative container py-4 px-4">
+						<motion.div
+							key="drawer"
+							className="fixed top-16 left-0 right-0 z-50 md:hidden border-b border-muted/10 bg-background-dark/90 overflow-hidden"
+							initial={{ clipPath: "inset(0 0 100% 0)" }}
+							animate={{ clipPath: "inset(0 0 0% 0)" }}
+							exit={{ clipPath: "inset(0 0 100% 0)" }}
+							transition={{
+								type: "spring",
+								stiffness: 420,
+								damping: 38,
+							}}
+						>
+							<div className="container py-4 px-4">
 								<motion.div
 									className="flex flex-col gap-2"
 									initial="hidden"
 									animate="show"
 									exit="hidden"
 									variants={{
-										hidden: {
-											transition: {
-												staggerChildren: 0.03,
-												staggerDirection: -1,
-											},
-										},
+										hidden: {},
 										show: {
 											transition: {
-												staggerChildren: 0.05,
-												delayChildren: 0.05,
+												staggerChildren: 0.06,
 											},
 										},
 									}}
@@ -110,12 +115,26 @@ export default function NavBar() {
 										<motion.div
 											key={link}
 											variants={{
-												hidden: { opacity: 0, y: -6 },
-												show: { opacity: 1, y: 0 },
+												hidden: {
+													opacity: 0,
+													y: -10,
+													filter: "blur(6px)",
+												},
+												show: {
+													opacity: 1,
+													y: 0,
+													filter: "blur(0px)",
+													transition: {
+														type: "spring",
+														stiffness: 500,
+														damping: 35,
+													},
+												},
 											}}
 										>
 											<Link
 												href={link}
+												onClick={() => setOpen(false)}
 												className={cn(
 													"block rounded-md px-3 py-2 text-sm transition-colors",
 													path === link
@@ -130,13 +149,27 @@ export default function NavBar() {
 
 									<motion.div
 										variants={{
-											hidden: { opacity: 0, y: -6 },
-											show: { opacity: 1, y: 0 },
+											hidden: {
+												opacity: 0,
+												y: -10,
+												filter: "blur(6px)",
+											},
+											show: {
+												opacity: 1,
+												y: 0,
+												filter: "blur(0px)",
+												transition: {
+													type: "spring",
+													stiffness: 500,
+													damping: 35,
+												},
+											},
 										}}
 										className="pt-2"
 									>
 										<Link
 											href="/contact"
+											onClick={() => setOpen(false)}
 											className={cn(
 												buttonVariants(),
 												"w-full justify-center",

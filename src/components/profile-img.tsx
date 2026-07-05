@@ -21,7 +21,7 @@ export default function ProfileImage() {
 				}}
 				animate={{
 					opacity: [0, 0.85, 0.6],
-					scale: [0.85, 1.25, 1.05],
+					scale: [0.85, 1.5, 1.35],
 					rotate: [0, 4, 0],
 					filter: [
 						"blur(60px) brightness(0.6)",
